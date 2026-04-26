@@ -340,6 +340,11 @@ function renderQuick() {
 document.getElementById("ancho").addEventListener("keydown", e => { if(e.key === "Enter") document.getElementById("largo").focus(); });
 document.getElementById("largo").addEventListener("keydown", e => { if(e.key === "Enter") buscar(); });
 renderQuick();
+  window.onload = function() {
+  setTimeout(function(){
+    document.getElementById("loading").style.display = "none";
+  }, 1200);
+  }
 </script>
 </body>
 </html>
