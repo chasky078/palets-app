@@ -33,7 +33,7 @@ body {
     radial-gradient(circle at 100% 0%, rgba(37,99,235,.16), transparent 30%),
     linear-gradient(180deg,#050914,#08111f 52%,#050914);
 }
-.app { width:100%; max-width:420px; margin:0 auto; overflow:hidden; }
+.app { max-width:760px; margin:0 auto; }
 .header {
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   padding:8px 4px 12px;
@@ -162,16 +162,9 @@ input:focus { border-color:#f59e0b; box-shadow:0 0 0 4px rgba(245,158,11,.18); }
 <body>
 <div class="app">
   <div class="header">
-    <div class="logo" style="display:flex;align-items:center;gap:10px;">
-  
-  <img src="icon-192.png" alt="Colores Palets"
-       style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0;">
-  
-  <div style="font-size:18px;font-weight:900;line-height:1;">
-    COLORES PALETS
+    <div class="logo"><div class="logo-mark">P</div><div>Palets PRO</div></div>
+    <div class="badge">OPERARIO</div>
   </div>
-
-    </div>
 
   <div class="search-card">
     <div class="row">
@@ -321,3 +314,4 @@ renderQuick();
 </script>
 </body>
 </html>
+
