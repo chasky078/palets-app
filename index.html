@@ -349,6 +349,11 @@ renderQuick();
     document.getElementById("loading").style.display = "none";
   }, 1200);
   }
+  let puntos = 0;
+setInterval(function() {
+  puntos = (puntos + 1) % 4;
+  document.getElementById("textoCarga").innerText = "Cargando" + ".".repeat(puntos);
+}, 400);
 </script>
 </body>
 </html>
