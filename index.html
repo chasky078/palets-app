@@ -330,6 +330,7 @@ function limpiar() {
       <div class="status-text">Listo. Mete una medida.</div>
     </div>`;
   localStorage.removeItem("historial");
+  document.getElementById("quick").innerHTML = "";
 }
 function saveQuick(a,l) {
   let arr = [];
