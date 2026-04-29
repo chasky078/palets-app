@@ -76,7 +76,10 @@ text-align: center;
   animation: spin 1s linear infinite;
   margin: 0 auto 10px;
 }
-
+.logo-loading {
+  width: 120px;
+  margin-bottom: 20px;
+}
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
@@ -441,7 +444,8 @@ if (textoCarga) textoCarga.innerText = "Cargando" + ".".repeat(puntos);
 }, 1250);
 </script>
 <div id="loadingScreen" class="hidden">
-    <div class="spinner"></div>
+<img src="logo-s.png" class="logo-loading">
+ <div class="spinner"></div>
     <div class="loader-title">Consultando medidas...</div>
     <div class="loader-subtitle">Buscando combinación de colores</div>
   </div>
