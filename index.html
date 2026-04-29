@@ -347,6 +347,7 @@ function buscar() {
   const l = num(document.getElementById("largo").value);
   const hits = DATA.filter(r => num(r.ANCHO) === a && num(r.LARGO) === l);
   const result = document.getElementById("result");
+  setTimeout(() => {
 
   if (!hits.length) {
     result.innerHTML = `
@@ -376,7 +377,7 @@ function buscar() {
       </div>
     `).join("")}`;
   document.getElementById("loadingScreen").classList.add("hidden");
-}
+}, 1000);
 function limpiar() {
   document.getElementById("ancho").value = "";
   document.getElementById("largo").value = "";
