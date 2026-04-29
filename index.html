@@ -321,6 +321,7 @@ function buscar() {
         <div class="palette-grid">${parts(h.COLOR_PALET).map(colorBlock).join("")}</div>
       </div>
     `).join("")}`;
+  document.getElementById("loadingScreen").classList.add("hidden");
 }
 function limpiar() {
   document.getElementById("ancho").value = "";
