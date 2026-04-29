@@ -417,16 +417,12 @@ function renderQuick() {
 }
 document.getElementById("ancho").addEventListener("keydown", e => { if(e.key === "Enter") document.getElementById("largo").focus(); });
 document.getElementById("largo").addEventListener("keydown", e => { if(e.key === "Enter") buscar(); });
-window.onload = function() {
+renderQuick();
 
-  renderQuick();
-
-  setTimeout(function(){
-    const loading = document.getElementById("loading");
-    if (loading) loading.style.display = "none";
-  }, 1200);
-
-};
+setTimeout(function(){
+  const loading = document.getElementById("loading");
+  if (loading) loading.remove();
+}, 1200);
  let puntos = 0;
 setInterval(function() {
   puntos = (puntos + 1) % 4;
