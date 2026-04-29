@@ -57,7 +57,13 @@ background-position: 70% center;
 #loadingScreen.hidden {
   display: none;
 }
-
+@media (max-width: 768px) {
+  #loading {
+    background-size: contain;
+    background-position: center;
+    background-color: #000;
+  }
+}
 .loader-box {
   background: white;
   padding: 28px;
