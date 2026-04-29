@@ -348,7 +348,7 @@ function buscar() {
   const hits = DATA.filter(r => num(r.ANCHO) === a && num(r.LARGO) === l);
   const result = document.getElementById("result");
   setTimeout(() => {
-
+try {
   if (!hits.length) {
     result.innerHTML = `
       <div class="status">
@@ -377,7 +377,9 @@ function buscar() {
       </div>
     `).join("")}`;
   document.getElementById("loadingScreen").classList.add("hidden");
-
+} catch (e) {
+  document.getElementById("loadingScreen").classList.add("hidden");
+}
 }, 1000);
 }
 
