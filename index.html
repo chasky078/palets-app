@@ -288,6 +288,7 @@ function douliteBadge(v) {
   return `<div class="doulite"><span class="dot" style="background:${i.h}"></span><span>${c} · ${i.n}</span></div>`;
 }
 function buscar() {
+  document.getElementById("loadingScreen").classList.remove("hidden");
   const a = num(document.getElementById("ancho").value);
   const l = num(document.getElementById("largo").value);
   const hits = DATA.filter(r => num(r.ANCHO) === a && num(r.LARGO) === l);
