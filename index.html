@@ -427,7 +427,8 @@ renderQuick();
 setInterval(function() {
   puntos = (puntos + 1) % 4;
 const textoCarga = document.getElementById("textoCarga");
-if (textoCarga) textoCarga.innerText = "Cargando" + ".".repeat(puntos);}, 1250);
+if (textoCarga) textoCarga.innerText = "Cargando" + ".".repeat(puntos);
+}, 1250);
 </script>
 <div id="loadingScreen" class="hidden">
     <div class="spinner"></div>
