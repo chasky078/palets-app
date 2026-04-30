@@ -388,9 +388,9 @@ try {
         <div class="palette-grid">${parts(h.COLOR_PALET).map(colorBlock).join("")}</div>
       </div>
     `).join("")}`;
-  document.getElementById("loadingScreen").classList.add("hidden");
+  document.getElementById("loading").style.display = "none";
 } catch (e) {
-  document.getElementById("loadingScreen").classList.add("hidden");
+  document.getElementById("loading").style.display = "none";
 }
 }, 1000);
 }
