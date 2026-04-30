@@ -377,8 +377,10 @@ function buscar() {
         ${h.COLOR_PALET === "X-X-X" ? `
 <div style="
 margin-top:18px;
-padding:12px 20px;
-font-size:30px;
+font-size:clamp(20px, 6vw, 30px);
+padding:8px 14px;
+max-width:100%;
+box-sizing:border-box;
 font-weight:1000;
 color:#fff;
 background:#facc15;
