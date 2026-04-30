@@ -354,7 +354,7 @@ function douliteBadge(v) {
   return `<div class="doulite"><span class="dot" style="background:${i.h}"></span><span>${c} · ${i.n}</span></div>`;
 }
 function buscar() {
-  document.getElementById("loadingScreen").classList.remove("hidden");
+document.getElementById("loading").style.display = "flex";
   const a = num(document.getElementById("ancho").value);
   const l = num(document.getElementById("largo").value);
   const hits = DATA.filter(r => num(r.ANCHO) === a && num(r.LARGO) === l);
@@ -367,7 +367,7 @@ try {
         <div class="status-icon no">×</div>
       <div class="status-text">Medida no encontrada (<b>${a} x ${l}</b>). Revisa ANCHO y LARGO.</div>
       </div>`;
-    document.getElementById("loadingScreen").classList.add("hidden");
+    document.getElementById("loading").style.display = "none";
     return;
   }
 
