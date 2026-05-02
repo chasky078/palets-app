@@ -449,6 +449,7 @@ localStorage.removeItem("quickPalets");
 }
   function cerrarTutorial() {
   document.getElementById("tutorial").style.display = "none";
+  localStorage.setItem("tutorial_visto", "1");
   }
   function mostrarUpdateModal() {
   document.getElementById("updateModal").style.display = "flex";
