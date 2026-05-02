@@ -290,7 +290,7 @@ logo-s.png
   const savedVersion = localStorage.getItem("app_version");
 
 if (savedVersion && savedVersion !== APP_VERSION) {
-  mostrarAvisoActualizacion();
+mostrarUpdateModal();
 }
 
 localStorage.setItem("app_version", APP_VERSION);
@@ -444,6 +444,13 @@ function limpiar() {
 localStorage.removeItem("quickPalets");
   document.getElementById("quick").innerHTML = "";
   
+}
+  function mostrarUpdateModal() {
+  document.getElementById("updateModal").style.display = "flex";
+}
+
+function cerrarUpdate() {
+  document.getElementById("updateModal").style.display = "none";
 }
 function saveQuick(a,l) {
   let arr = [];
