@@ -290,7 +290,9 @@ logo-s.png
   const savedVersion = localStorage.getItem("app_version");
 
 if (savedVersion && savedVersion !== APP_VERSION) {
-// mostrarUpdateModal();
+ setTimeout(() => {
+  mostrarUpdateModal();
+}, 300);
 }
 
 localStorage.setItem("app_version", APP_VERSION);
