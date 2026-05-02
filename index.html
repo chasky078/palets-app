@@ -257,18 +257,7 @@ logo-s.png
 " style="width:48px;height:48px;border-radius:14px;object-fit:cover;">  </div>
 <div style="font-weight:800; letter-spacing:1px; font-size:27px; position:relative;">
   COLORES PALETS
-  <button onclick="abrirTutorial()" style="
-position:absolute;
-top:0;
-right:-30px;
-background:none;
-border:none;
-font-size:18px;
-color:white;
-opacity:0.8;
-">
-ℹ️
-  </button>
+  
 </div>
    </div>
   </div>
@@ -288,6 +277,7 @@ opacity:0.8;
     <button class="btn" onclick="buscar()">BUSCAR</button>
     <button class="btn btn-update" onclick="localStorage.setItem('tutorial_visto','1'); location.reload()">↻ ACTUALIZAR</button>
     <button class="btn btn-clear" onclick="limpiar()">LIMPIAR</button>
+    <button class="btn btn-help" onclick="abrirTutorial()">ℹ️ AYUDA</button>
     
     <div class="quick" id="quick"></div>
 
