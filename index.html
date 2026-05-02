@@ -477,12 +477,15 @@ function renderQuick() {
 document.getElementById("ancho").addEventListener("keydown", e => { if(e.key === "Enter") document.getElementById("largo").focus(); });
 document.getElementById("largo").addEventListener("keydown", e => { if(e.key === "Enter") buscar(); });
 renderQuick();
-  if (!localStorage.getItem("tutorial_visto")) {
-  document.getElementById("tutorial").style.display = "flex";
-  }
+
   window.onload = function() {
   setTimeout(function(){
     document.getElementById("loading").style.display = "none";
+
+    if (!localStorage.getItem("tutorial_visto")) {
+      document.getElementById("tutorial").style.display = "flex";
+    }
+
   }, 1200);
   }
  let puntos = 0;
