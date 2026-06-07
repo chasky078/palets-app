@@ -1,716 +1,5037 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-<meta name="apple-mobile-web-app-title" content="Colores Palets">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0b0f19">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>COLORES PALETS </title>
-  <meta name="apple-mobile-web-app-title" content="Colores Palets">
-  <style>
-:root {
-  --bg:#050914;
-  --panel:#111827;
-  --panel2:#172033;
-  --line:rgba(255,255,255,.16);
-  --text:#ffffff;
-  --muted:#aab7cf;
-  --orange:#ff7a18;
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PALETS PRO</title>
+<meta name="theme-color" content="#071529">
+<link rel="manifest" href="manifest.json">
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#06111f;
+  --bg2:#020713;
+  --card:rgba(8,18,34,.86);
+  --line:rgba(255,255,255,.12);
+  --blue:#22a8ff;
+  --blue2:#2563eb;
+  --text:#f8fafc;
+  --muted:#9fb3c8;
   --yellow:#facc15;
-  --red:#ef4444;
-  --green:#22c55e;
 }
-    #loadingScreen {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+html,body{margin:0;min-height:100%;font-family:Arial, Helvetica, sans-serif;background:var(--bg2);color:var(--text);}
+body{overflow-x:hidden}
+button,input,select{font-family:inherit}
+button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.screen{display:none;min-height:100vh;padding:18px;}
+.screen.active{display:block!important;animation:fadeIn .28s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wrap{max-width:460px;margin:0 auto;position:relative;z-index:2}
+/* SPLASH */
+#splash{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+  padding:0;
 }
-
-#loadingScreen.hidden {
-  display: none;
-}
-
-.loader-box {
-  background: white;
-  padding: 28px;
-  border-radius: 22px;
-  text-align: center;
-}
-
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #ccc;
-  border-top: 5px solid #22c55e;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 10px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-    #loadingScreen {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-#loadingScreen.hidden {
-  display: none;
-}
-
-.loader-box {
-  background: white;
-  padding: 28px;
-  border-radius: 22px;
-  text-align: center;
-}
-* { box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-html, body { margin:0; min-height:100%; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
-body {
-  padding: max(10px, env(safe-area-inset-top)) 10px max(12px, env(safe-area-inset-bottom));
+#splash::before{
+  content:"";
+  position:absolute;inset:0;
   background:
-    radial-gradient(circle at 18% 0%, rgba(250,204,21,.18), transparent 30%),
-    radial-gradient(circle at 100% 0%, rgba(37,99,235,.16), transparent 30%),
-    linear-gradient(180deg,#050914,#08111f 52%,#050914);
+    linear-gradient(180deg, rgba(2,8,20,.05) 0%, rgba(2,8,20,.12) 42%, rgba(4,13,27,.90) 73%, rgba(2,8,20,.98) 100%),
+    url('inicio-palets.png') center top/cover no-repeat;
+  transform:scale(1.01);
 }
-.app { max-width:760px; margin:0 auto; }
-.header {
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  padding:8px 4px 12px;
+#splash::after{
+  content:"";position:absolute;inset:auto 0 0 0;height:55%;
+  background:radial-gradient(circle at 50% 0%, rgba(34,168,255,.22), transparent 45%),
+             linear-gradient(180deg, transparent, rgba(2,9,22,.96));
 }
-.logo {
-  display:flex; align-items:center; gap:10px;
-  font-weight:1000; letter-spacing:-1px; font-size:clamp(28px,8vw,44px);
+.splash-content{
+  position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  padding:28px 24px 54px;text-align:center;
 }
-.logo-mark {
-  width:48px; height:48px; border-radius:14px;
-  background: #0b4ea2;
-  display:grid; place-items:center; color:#111827; font-size:26px; font-weight:1000;
-  box-shadow:0 10px 28px rgba(249,115,22,.24);
+.mark{width:58px;height:62px;margin-bottom:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;filter:drop-shadow(0 8px 18px rgba(34,168,255,.35))}
+.mark span{display:block;border-radius:3px;background:linear-gradient(180deg,#47c7ff,#2563eb);transform:skewY(-12deg)}
+.title{font-size:54px;letter-spacing:13px;font-weight:900;margin:0 0 12px;text-shadow:0 12px 30px rgba(0,0,0,.65)}
+.under{width:75px;height:4px;border-radius:99px;background:linear-gradient(90deg,#19c4ff,#2864ff);margin-bottom:18px}
+.subtitle{font-size:16px;letter-spacing:6px;line-height:1.65;color:#37b7ff;text-transform:uppercase;margin:0 0 12px}
+.by{font-size:13px;letter-spacing:3px;color:rgba(255,255,255,.68);margin-bottom:34px;display:flex;align-items:center;gap:12px}
+.by::before,.by::after{content:"";width:52px;height:1px;background:rgba(255,255,255,.18)}
+.primary-btn{width:min(100%,340px);height:62px;border-radius:22px;background:linear-gradient(90deg,#20c5ff,#2864ff);color:white;font-size:19px;font-weight:900;letter-spacing:2px;box-shadow:0 18px 35px rgba(37,99,235,.35)}
+.loading{margin-top:24px;color:#37b7ff;letter-spacing:3px;font-size:13px;display:flex;gap:12px;align-items:center}
+.spinner{width:24px;height:24px;border-radius:50%;border:4px solid rgba(55,183,255,.25);border-top-color:#37b7ff;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* COMMON */
+.topbar{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.back{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.08);color:white;font-size:22px}
+.head{text-align:center;margin:4px 0 18px}
+.head h1{margin:0;font-size:28px;letter-spacing:2px}
+.head p{margin:8px 0 0;color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 18px 45px rgba(0,0,0,.35);backdrop-filter:blur(12px)}
+.menu-bg{background:radial-gradient(circle at 20% 0%,rgba(34,168,255,.18),transparent 35%),linear-gradient(180deg,#0a1930,#020713)}
+.menu-logo{width:74px;height:74px;margin:18px auto 12px;border-radius:24px;background:linear-gradient(135deg,#20c5ff,#2864ff);display:grid;place-items:center;box-shadow:0 20px 35px rgba(34,168,255,.26)}
+.menu-logo .mark{width:42px;height:44px;margin:0;gap:5px}
+.menu-title{text-align:center;font-size:36px;font-weight:900;letter-spacing:7px;margin-bottom:4px}
+.menu-by{text-align:center;color:rgba(255,255,255,.55);font-size:12px;letter-spacing:2px;margin-bottom:24px}
+.menu-grid{display:grid;gap:14px}
+.menu-btn{min-height:96px;border-radius:24px;background:linear-gradient(145deg,rgba(20,43,75,.95),rgba(7,19,38,.95));border:1px solid rgba(255,255,255,.12);color:white;padding:18px;text-align:left;box-shadow:0 16px 35px rgba(0,0,0,.32)}
+.menu-btn strong{display:block;font-size:20px;margin-bottom:7px}
+.menu-btn span{color:#9fb3c8;font-size:14px;line-height:1.35}
+.label{color:var(--muted);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+input,select{height:56px;border-radius:16px;border:2px solid #334155;background:#020817;color:white;text-align:center;font-size:24px;font-weight:800;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(34,168,255,.14)}
+.actions{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;border-radius:16px;padding:16px;font-size:16px;font-weight:900;letter-spacing:.5px}
+.btn-blue{background:linear-gradient(90deg,#20c5ff,#2864ff);color:white}
+.btn-dark{background:#263241;color:white}
+.result{margin-top:16px}
+.error{margin-top:16px;background:#3b1111;color:#fecaca;border:1px solid #7f1d1d;border-radius:18px;padding:17px;text-align:center;font-weight:800}
+.ok{background:rgba(8,18,34,.9);border:1px solid rgba(255,255,255,.12);border-radius:22px;overflow:hidden;box-shadow:0 14px 35px rgba(0,0,0,.35)}
+.result-title{padding:15px 18px;background:#0f172a;color:#38bdf8;font-size:14px;letter-spacing:1px;text-transform:uppercase;font-weight:bold}
+.row{padding:13px 18px;border-top:1px solid #263241;display:flex;justify-content:space-between;gap:14px}
+.row span{color:#94a3b8}
+.row strong{text-align:right;color:#f8fafc}
+/* MATERIAL */
+.material-row{display:flex;align-items:center;justify-content:center;gap:7px;font-size:24px;font-weight:bold}
+.fixed{color:#e5e7eb}
+#p1{width:70px}#p2{width:95px}
+.preview{margin-top:14px;background:#020617;color:#cbd5e1;padding:13px;border-radius:14px;text-align:center;font-size:15px}
+.color-box{height:230px;margin:14px;border-radius:18px;border:8px solid #334155;outline:3px solid rgba(255,255,255,.28);outline-offset:-14px;box-shadow:0 16px 36px rgba(0,0,0,.75),inset 0 0 30px rgba(255,255,255,.14),inset 0 0 0 4px rgba(0,0,0,.28)}
+.no-lleva{background:#1f2937!important;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;text-align:center;text-transform:uppercase;height:100%;font-size:38px;letter-spacing:2px}
+.no-lleva small{font-size:20px;margin-top:6px;color:#cbd5e1}
+/* PALETS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+.three input{font-size:19px;text-transform:uppercase}
+.palet-chip{display:inline-flex;padding:8px 12px;border-radius:999px;background:#0f172a;border:1px solid #263241;margin:4px 4px 0 0;font-size:13px;color:#cbd5e1}
+.footer-note{text-align:center;margin:22px 0 4px;color:rgba(255,255,255,.45);font-size:12px;letter-spacing:2px}
+@media(max-width:390px){
+  .title{font-size:43px;letter-spacing:9px}
+  .subtitle{font-size:13px;letter-spacing:4px}
+  .splash-content{padding-bottom:38px}
+  .color-box{height:205px}
 }
-.badge {
-  border:1px solid var(--line); background:rgba(255,255,255,.07);
-  color:#dbeafe; border-radius:999px; padding:8px 11px;
-  font-size:12px; font-weight:900; white-space:nowrap;
-}
-.search-card {
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
-  border:1px solid var(--line); border-radius:26px;
-  padding:16px; box-shadow:0 24px 60px rgba(0,0,0,.35);
-}
-.row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-label {
-  display:block; color:#dbeafe; font-weight:1000; letter-spacing:.06em;
-  font-size:14px; margin:0 0 7px 3px;
-}
-input {
-  width:100%; border:1px solid rgba(255,255,255,.18);
-  background:#071022; color:#fff; border-radius:20px;
-  font-size:40px; padding:18px 16px; outline:none; font-weight:800;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
-}
-input:focus { border-color:#f59e0b; box-shadow:0 0 0 4px rgba(245,158,11,.18); }
-.btn {
-  width:100%; border:0; border-radius:22px; padding:20px 14px; margin-top:12px;
-  font-size:30px; font-weight:1000; color:#111827;
-  background:linear-gradient(135deg,#facc15,#ff7a18);
-  box-shadow:0 12px 30px rgba(249,115,22,.24);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-    .btn:active {
-  transform: scale(0.94);
-box-shadow: 0 2px 6px rgba(0,0,0,0.4);    }
-.btn-clear {
-  background:rgba(255,255,255,.10); color:#fff; border:1px solid var(--line);
-  box-shadow:none; font-size:24px; padding:16px;
-}
-    .btn-update {
-  background: rgba(0, 150, 255, 0.2);
-  color: #fff;
-  border: 1px solid rgba(0,150,255,0.4);
-      display: block;
-width: 100%;
-margin: 10px 0;
-    }
 
-.btn-help {
-  background:linear-gradient(135deg,rgba(59,130,246,.22),rgba(14,165,233,.12));
-  color:#e0f2fe;
-  border:1px solid rgba(125,211,252,.45);
-  box-shadow:0 10px 26px rgba(14,165,233,.12);
-  font-size:24px;
-  padding:16px;
+/* EXTRAS: AJUSTES / AYUDA / SEGURIDAD / CÓDIGO */
+.menu-small-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.menu-small{min-height:72px;border-radius:20px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.10);color:white;padding:12px;text-align:center;font-weight:900;box-shadow:0 12px 28px rgba(0,0,0,.26)}
+.menu-small span{display:block;color:#9fb3c8;font-size:12px;font-weight:700;margin-top:5px;line-height:1.25}
+.info-box{background:rgba(2,8,23,.55);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:16px;margin-top:12px;color:#dbeafe;line-height:1.55;font-size:15px}
+.info-box b{color:#38bdf8}
+.info-list{margin:10px 0 0;padding-left:18px;color:#dbeafe;line-height:1.65}
+.secret-row{display:flex;gap:10px;margin-top:12px}
+.secret-row input{flex:1;font-size:24px;letter-spacing:6px}
+.secret-row button{width:112px;border-radius:16px;background:linear-gradient(90deg,#20c5ff,#2864ff);color:#fff;font-weight:900}
+.hidden{display:none!important}
+.admin-panel{margin-top:16px;border:1px solid rgba(34,168,255,.25);background:rgba(14,116,144,.10);border-radius:20px;padding:16px}
+.pill-ok{display:inline-block;background:rgba(34,197,94,.16);color:#86efac;border:1px solid rgba(34,197,94,.35);border-radius:999px;padding:8px 12px;font-weight:900;font-size:13px;margin-bottom:12px}
+.setting-line{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding:13px 0;color:#cbd5e1}
+.setting-line:first-child{border-top:0}
+.mini-btn{border-radius:14px;background:#263241;color:white;padding:12px 14px;font-weight:900}
+.watermark-switch{display:flex;align-items:center;gap:10px;margin-top:10px;color:#cbd5e1}
+.watermark-switch input{width:22px;height:22px;accent-color:#22a8ff}
+.app-watermark{position:fixed;right:10px;bottom:8px;z-index:50;color:rgba(255,255,255,.30);font-size:10px;letter-spacing:2px;pointer-events:none;display:none}
+.app-watermark.on{display:block}
+
+
+/* === MEJORAS DEFINITIVAS PALETS PRO === */
+body[data-theme="blue"]{--blue:#22a8ff;--blue2:#2563eb;--yellow:#facc15;}
+body[data-theme="yellow"]{--blue:#facc15;--blue2:#f59e0b;--yellow:#facc15;}
+body[data-theme="green"]{--blue:#22c55e;--blue2:#16a34a;--yellow:#86efac;}
+body[data-theme="red"]{--blue:#ef4444;--blue2:#b91c1c;--yellow:#fecaca;}
+body[data-theme="purple"]{--blue:#a855f7;--blue2:#7c3aed;--yellow:#ddd6fe;}
+body.size-big .menu-btn strong{font-size:22px}
+body.size-big .menu-btn span,body.size-big .preview,body.size-big .row{font-size:17px}
+body.size-big input{font-size:29px;height:64px}
+body.size-big .btn,body.size-big .primary-btn{font-size:19px}
+body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!important;transition:none!important}
+.update-card{display:none;margin:16px 0;padding:16px;border-radius:20px;background:rgba(34,168,255,.12);border:1px solid rgba(34,168,255,.35);box-shadow:0 14px 32px rgba(0,0,0,.35)}
+.update-card.show{display:block;animation:fadeIn .32s ease}
+.update-card b{display:block;color:#fff;font-size:17px;margin-bottom:8px}
+.update-card ul{margin:8px 0 0;padding-left:20px;color:#cfe9ff;line-height:1.55;font-size:14px}
+.settings-group{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.settings-title{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:900;margin-bottom:10px}
+.option-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid rgba(255,255,255,.07)}
+.option-row:first-of-type{border-top:0}
+.option-row span{color:#e5edf7;font-weight:800}
+.option-row small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 12px;border-radius:999px;background:#17243a;color:#eaf2ff;border:1px solid rgba(255,255,255,.12);font-weight:900}
+.chip.active{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+.toggle{width:54px;height:30px;border-radius:30px;background:#263241;position:relative;border:1px solid rgba(255,255,255,.14)}
+.toggle::after{content:"";position:absolute;width:24px;height:24px;border-radius:50%;background:white;left:3px;top:2px;transition:.2s}
+.toggle.on{background:linear-gradient(135deg,var(--blue),var(--blue2))}
+.toggle.on::after{left:26px}
+.history-item{padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.history-item b{color:white}.history-item p{margin:5px 0 0;color:#b8c7d9;line-height:1.45}
+.secret-modal{position:fixed;inset:0;background:rgba(0,0,0,.74);z-index:200;display:none;align-items:center;justify-content:center;padding:18px}
+.secret-modal.show{display:flex}
+.secret-card{width:min(420px,100%);background:#081426;border:1px solid rgba(255,255,255,.14);border-radius:26px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.65)}
+.secret-card h3{margin:0 0 8px}.secret-card p{color:#aebed1;margin:0 0 14px}.secret-card input{width:100%;margin:6px 0 12px}.secret-actions{display:flex;gap:10px}.secret-actions button{flex:1}
+.app-watermark{display:block!important;color:rgba(255,255,255,.42)!important;pointer-events:auto!important;user-select:none}
+
+
+/* === COLORES REALES PALETS / DOULITE - SOLO VISUAL RESULTADO === */
+.real-colors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;}
+.real-color{min-height:76px;border-radius:16px;border:1px solid rgba(255,255,255,.20);display:flex;align-items:end;justify-content:center;padding:8px;font-weight:1000;font-size:14px;text-shadow:0 2px 7px rgba(0,0,0,.65);box-shadow:inset 0 0 20px rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.22);}
+.real-duolite{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);font-weight:1000;}
+.real-dot{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.55);box-shadow:0 5px 14px rgba(0,0,0,.35);flex:0 0 auto;}
+.combo-title{font-size:13px;color:#9fb3c8;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;margin-top:10px;}
+
+/* FIX: si Doulite = NO LLEVA, no mostrar círculo de color */
+.doulite-dot.no-doulite,
+.dot.no-doulite,
+.doulite-color.no-doulite {
+  display: none !important;
 }
 
-.result {
-  margin-top:14px; border-radius:26px; border:1px solid var(--line);
-  background:#071022; overflow:hidden;
+
+/* FIX REAL: NO LLEVA no debe enseñar bolita de Doulite */
+.real-duolite.no-doulite .real-dot {
+  display:none !important;
 }
-.status {
-  padding:14px 16px; display:flex; align-items:center; gap:10px;
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-.status-icon {
-  width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
-  font-size:24px; font-weight:1000;
-}
-.ok { background:rgba(34,197,94,.18); color:#4ade80; border:1px solid rgba(34,197,94,.38); }
-.no { background:rgba(239,68,68,.16); color:#f87171; border:1px solid rgba(239,68,68,.34); }
-.status-text { font-size:18px; color:#dbeafe; font-weight:900; }
-.status-text b { color:#fff; }
-.option {
-  margin:14px; padding:14px; border-radius:24px;
-  border:1px solid rgba(255,255,255,.14);
-  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
-}
-.option-head {
-  display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;
-}
-.option-title {
-  font-size:32px; font-weight:1000; letter-spacing:-.5px;
-}
-.doulite {
-  display:flex; align-items:center; gap:8px;
-  border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.10);
-  border-radius:999px; padding:8px 12px; font-size:15px; font-weight:1000;
-}
-.dot { width:28px; height:28px; border-radius:50%; border:2px solid rgba(255,255,255,.55); flex:0 0 auto; }
-.section-title {
-  color:#c7d2fe; text-transform:uppercase; letter-spacing:.12em;
-  font-size:12px; font-weight:1000; margin:0 0 8px 2px;
-}
-.palette-grid {
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0,1fr));
-  gap:10px;
-}
-.color-block {
-  min-height:108px; border-radius:20px; padding:12px;
-  display:flex; flex-direction:column; justify-content:space-between;
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow: inset 0 0 24px rgba(255,255,255,.10), 0 10px 24px rgba(0,0,0,.24);
-  text-shadow:0 3px 9px rgba(0,0,0,.7);
-}
-.color-code { font-size:36px; font-weight:1000; line-height:1; }
-.color-name { font-size:13px; font-weight:1000; }
-.empty {
-  padding:28px 16px; color:#cbd5e1; font-size:20px; line-height:1.35;
-}
-.quick {
-  display:flex; gap:8px; overflow-x:auto; padding:10px 2px 2px; scrollbar-width:none;
-}
-.quick button {
-  border:1px solid var(--line); background:rgba(255,255,255,.08); color:#fff;
-  border-radius:999px; padding:10px 13px; font-weight:900; white-space:nowrap;
-}
-@media(max-width:430px) {
-  body { padding-left:8px; padding-right:8px; }
-  .logo { font-size:30px; }
-  .logo-mark { width:42px; height:42px; }
-  .search-card { padding:12px; border-radius:22px; }
-  input { font-size:34px; padding:16px 14px; }
-  .btn { font-size:26px; padding:18px 12px; }
-  .option { margin:10px; padding:12px; }
-  .option-title { font-size:28px; }
-  .palette-grid { gap:8px; }
-  .color-block { min-height:98px; border-radius:17px; padding:10px; }
-  .color-code { font-size:31px; }
-  .color-name { font-size:12px; }
-  .doulite { font-size:13px; padding:7px 10px; }
-  .dot { width:24px; height:24px; }
-}
+
 </style>
 </head>
 <body>
-  <div id="loading" style="
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#050914;
-  color:white;
-  display:flex;
-    flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  font-size:22px;
-  font-weight:700;
-">
-  <span id="textoCarga">Cargando</span>
-    <div style="margin-top:10px; font-size:14px; opacity:0.7;">
-  BY RUBEN D.®
+
+<section id="splash" class="screen active">
+  <div class="splash-content">
+    <div class="mark"><span></span><span></span><span></span></div>
+    <h1 class="title">PALETS</h1>
+    <div class="under"></div>
+    <p class="subtitle">Sistema inteligente<br>de búsqueda</p>
+    <div class="by">By Rubén D. 268</div>
+    <button class="primary-btn" onclick="go('menu')">ENTRAR</button>
+    <div class="loading"><span class="spinner"></span><span>CARGANDO...</span></div>
+  </div>
+</section>
+
+<section id="menu" class="screen menu-bg">
+  <div class="wrap">
+    <div class="menu-logo"><div class="mark"><span></span><span></span><span></span></div></div>
+    <div class="menu-title">PALETS</div>
+    <div class="menu-by">By Rubén D. 268</div>
+    <div id="updateCard" class="update-card"></div>
+    <div class="menu-grid">
+      <button class="menu-btn" onclick="go('medidas')"><strong>Buscar color palets</strong><span>Consulta por ancho y largo.</span></button>
+      <button class="menu-btn" onclick="go('material')"><strong>Buscar duolite por material</strong><span>App de material integrada completa.</span></button>
+      <button class="menu-btn" onclick="go('color')"><strong>Buscar por color</strong><span>Escribe los 3 colores exactos, sin desplegable.</span></button>
+    </div>
+    <div class="menu-small-grid">
+      <button class="menu-small" onclick="go('ajustes')">⚙️ Ajustes<span>Personalización</span></button>
+      <button class="menu-small" onclick="go('ayuda')">❔ Ayuda<span>Tutorial</span></button>
+      <button class="menu-small" onclick="go('normas')">🛡️ Normas<span>Seguridad</span></button>
+    </div>
+    <div class="footer-note">PALETS PRO</div>
+  </div>
+</section>
+
+<section id="medidas" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Color palets</b><br><small style="color:#9fb3c8">Por medidas</small></div></div>
+    <div class="card">
+      <div class="label">Introduce medidas</div>
+      <div class="two">
+        <input id="anchoPalet" type="tel" inputmode="numeric" placeholder="ANCHO" maxlength="4">
+        <input id="largoPalet" type="tel" inputmode="numeric" placeholder="LARGO" maxlength="4">
+      </div>
+      <div class="actions">
+        <button class="btn btn-blue" onclick="buscarMedida()">BUSCAR</button>
+        <button class="btn btn-dark" onclick="limpiarMedida()">Limpiar</button>
+      </div>
+    </div>
+    <div id="resMedida" class="result"></div>
+  </div>
+</section>
+
+<section id="color" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Buscar por color</b><br><small style="color:#9fb3c8">Solo combinación exacta</small></div></div>
+    <div class="card">
+      <div class="label">Colores de tacos</div>
+      <div class="three">
+        <input id="c1" type="text" placeholder="IZQ" maxlength="6" autocomplete="off">
+        <input id="c2" type="text" placeholder="MED" maxlength="6" autocomplete="off">
+        <input id="c3" type="text" placeholder="DER" maxlength="6" autocomplete="off">
+      </div>
+      <div class="preview">Ejemplo: BL  BL  AZ · NE · RO · MA</div>
+      <div class="actions">
+        <button class="btn btn-blue" onclick="buscarColorPalet()">BUSCAR</button>
+        <button class="btn btn-dark" onclick="limpiarColorPalet()">Limpiar</button>
+      </div>
+    </div>
+    <div id="resColor" class="result"></div>
+  </div>
+</section>
+
+<section id="material" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Color Doulite</b><br><small style="color:#9fb3c8">Consulta rápida por material</small></div></div>
+    <div class="card">
+      <div class="label">Introduce material</div>
+      <div class="material-row">
+        <span class="fixed">3000</span>
+        <input id="p1" type="tel" inputmode="numeric" maxlength="2" placeholder="00">
+        <span class="fixed">-</span>
+        <span class="fixed">00</span>
+        <input id="p2" type="tel" inputmode="numeric" maxlength="3" placeholder="000">
+      </div>
+      <div class="preview" id="preview">Material: 300000-00000</div>
+      <div class="actions">
+        <button class="btn btn-blue" type="button" onclick="buscar()">BUSCAR</button>
+        <button class="btn btn-dark" type="button" onclick="limpiar()">Limpiar</button>
+      </div>
+    </div>
+    <div id="res" class="result"></div>
+  </div>
+</section>
+
+
+<section id="ajustes" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Ajustes</b><br><small style="color:#9fb3c8">Personalización visible para todos</small></div></div>
+    <div class="card">
+      <div class="label">Apariencia</div>
+      <div class="option-row"><div><span>Tema principal</span><small>Cambia el color de botones y detalles.</small></div></div>
+      <div class="chips">
+        <button class="chip" data-theme-btn="blue" onclick="setTheme('blue')">Azul</button>
+        <button class="chip" data-theme-btn="yellow" onclick="setTheme('yellow')">Amarillo</button>
+        <button class="chip" data-theme-btn="green" onclick="setTheme('green')">Verde</button>
+        <button class="chip" data-theme-btn="red" onclick="setTheme('red')">Rojo</button>
+        <button class="chip" data-theme-btn="purple" onclick="setTheme('purple')">Morado</button>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-title">Tamaño</div>
+        <div class="chips">
+          <button class="chip" data-size-btn="normal" onclick="setSize('normal')">Normal</button>
+          <button class="chip" data-size-btn="big" onclick="setSize('big')">Grande</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-title">Sonido y sensación</div>
+        <div class="option-row"><div><span>Sonidos</span><small>Click, encontrado, error y actualización.</small></div><button id="soundToggle" class="toggle" onclick="toggleSound()"></button></div>
+        <div class="option-row"><div><span>Vibración</span><small>Vibración suave al encontrar o fallar.</small></div><button id="vibrationToggle" class="toggle" onclick="toggleVibration()"></button></div>
+        <div class="option-row"><div><span>Animaciones</span><small>Transiciones y efectos suaves.</small></div><button id="animationsToggle" class="toggle" onclick="toggleAnimations()"></button></div>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-title">Actualizaciones</div>
+        <div class="preview">Aquí aparecerán las novedades cuando publiques una nueva versión.</div>
+        <button class="btn btn-blue" onclick="go('historial')" style="width:100%;margin-top:12px">Ver historial de actualizaciones</button>
+      </div>
     </div>
   </div>
-<div class="app">
-  <div class="header">
-   <div class="logo">
-     <div class="badge">RUBÉN D.</div>
-  <div class="logo-mark">
-<img src="
-logo-s.png
-" style="width:48px;height:48px;border-radius:14px;object-fit:cover;">  </div>
-<div style="font-weight:800; letter-spacing:1px; font-size:27px; position:relative;">
-  COLORES PALETS
-  
-</div>
-   </div>
+</section>
+
+<section id="historial" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('ajustes')">‹</button><div><b>Historial</b><br><small style="color:#9fb3c8">Novedades de PALETS PRO</small></div></div>
+    <div class="card" id="historialBox"></div>
   </div>
+</section>
 
-  <div class="search-card">
-    <div class="row">
-      <div>
-        <label>ANCHO</label>
-        <input id="ancho" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="950" autocomplete="off">
-      </div>
-      <div>
-        <label>LARGO</label>
-        <input id="largo" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="931" autocomplete="off">
-      </div>
+<section id="ayuda" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Ayuda / Tutorial</b><br><small style="color:#9fb3c8">Uso rápido de PALETS PRO</small></div></div>
+    <div class="card">
+      <div class="label">Cómo usar la app</div>
+      <div class="info-box"><b>Buscar color palets</b><br>Introduce ANCHO y LARGO. Si no existe exacto, la app muestra medidas cercanas para evitar errores de escritura.</div>
+      <div class="info-box"><b>Buscar duolite por material</b><br>Escribe solo los números que faltan del material. La app forma el código 3000XX-00XXX automáticamente.</div>
+      <div class="info-box"><b>Buscar por color</b><br>Escribe los 3 tacos por letras. Ejemplos: <b>BL</b> = Blanco, <b>AZ</b> = Azul, <b>NE</b> = Negro, <b>RO</b> = Rojo, <b>MA</b> = Madera.</div>
+      <ul class="info-list">
+        <li>Los campos de color saltan automáticamente al siguiente.</li>
+        <li>La búsqueda por color solo enseña combinaciones exactas de los 3 tacos.</li>
+        <li>La imagen de inicio debe llamarse <b>inicio-palets.png</b> y estar junto al index.</li>
+      </ul>
     </div>
-    
-    <button class="btn" onclick="buscar()">BUSCAR</button>
-    <button class="btn btn-update" onclick="location.reload()">↻ ACTUALIZAR</button>
-    <button class="btn btn-clear" onclick="limpiar()">LIMPIAR</button>
-    <button class="btn btn-help" onclick="abrirTutorial()">ℹ️ AYUDA</button>
-    
-    <div class="quick" id="quick"></div>
+  </div>
+</section>
 
-    <div class="result" id="result">
-      <div class="status">
-        <div class="status-icon ok">✓</div>
-        <div class="status-text">Introduce ANCHO y LARGO</div>
-      </div>
+<section id="normas" class="screen menu-bg">
+  <div class="wrap">
+    <div class="topbar"><button class="back" onclick="go('menu')">‹</button><div><b>Normas de seguridad</b><br><small style="color:#9fb3c8">Consulta rápida para palets</small></div></div>
+    <div class="card">
+      <div class="label">Seguridad básica</div>
+      <div class="info-box"><b>Antes de mover palets</b><br>Comprueba que la pila está estable, sin tacos rotos peligrosos y sin flejes sueltos.</div>
+      <div class="info-box"><b>Zona de paso</b><br>Mantén pasillos libres, respeta líneas de circulación y no invadas zonas de maniobra.</div>
+      <div class="info-box"><b>Carretilla / transpaleta</b><br>No pases por debajo de cargas, no eleves personas y mantén distancia con otros trabajadores.</div>
+      <div class="info-box"><b>Orden y limpieza</b><br>Retira restos de madera, plásticos o flejes para evitar tropiezos, cortes o enganches.</div>
+    </div>
+  </div>
+</section>
+<div id="appWatermark" class="app-watermark" onclick="watermarkTap()">By Rubén D. 268</div>
+<div id="secretModal" class="secret-modal">
+  <div class="secret-card">
+    <h3>Acceso desarrollador</h3>
+    <p>Introduce el código privado.</p>
+    <input id="secretCodeInput" type="text" placeholder="Código" maxlength="10" autocomplete="off">
+    <div id="secretMsg" class="preview" style="display:none"></div>
+    <div class="secret-actions">
+      <button class="btn btn-dark" onclick="closeSecret()">Cancelar</button>
+      <button class="btn btn-blue" onclick="checkSecretCode()">Entrar</button>
     </div>
   </div>
 </div>
 
 <script>
-  const APP_VERSION = "1.0.6";
-  const savedVersion = localStorage.getItem("app_version");
+const versionApp = "1.0";
+const cambiosApp = [];
+const historialUpdates = [];
 
-if (savedVersion !== APP_VERSION) {
-  setTimeout(() => {
-    mostrarUpdateModal();
-  }, 300);
-}
-
-localStorage.setItem("app_version", APP_VERSION);
-const DATA = [{"ANCHO": "795", "LARGO": "739", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "800", "LARGO": "673", "COLOR_PALET": "VE-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "800", "LARGO": "739", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "800", "LARGO": "784", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "805", "LARGO": "749", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "814", "LARGO": "798", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "815", "LARGO": "885", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "815", "LARGO": "960", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "815", "LARGO": "1025", "COLOR_PALET": "BL-BL-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "815", "LARGO": "1035", "COLOR_PALET": "BL-BL-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "816", "LARGO": "943", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "819", "LARGO": "791", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "820", "LARGO": "749", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "820", "LARGO": "762", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "823", "LARGO": "926", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "826", "LARGO": "943", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "834", "LARGO": "702", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "834", "LARGO": "744", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "834", "LARGO": "762", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "834", "LARGO": "766", "COLOR_PALET": "NA-AZ-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "834", "LARGO": "867", "COLOR_PALET": "BL-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "835", "LARGO": "759", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "839", "LARGO": "673", "COLOR_PALET": "NE-X-GR", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "842", "LARGO": "702", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "846", "LARGO": "943", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "680", "COLOR_PALET": "NA-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "686", "COLOR_PALET": "RO-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "702", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "714", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "748", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "759", "COLOR_PALET": "AZ-AZ-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "762", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "766", "COLOR_PALET": "AZ-AZ-AZ", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "772", "COLOR_PALET": "AZ-AZ-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "790", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "798", "COLOR_PALET": "AZ-AZ-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "800", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "MAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "805", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "823", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "827", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "834", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "853", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "864", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "868", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "926", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "944", "COLOR_PALET": "BL-NA-BL", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "850", "LARGO": "944", "COLOR_PALET": "RO-NA-BL", "COLOR_DOULITE": "NAR", "OPCION": "2"}, {"ANCHO": "852", "LARGO": "790", "COLOR_PALET": "NE-RO-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "852", "LARGO": "974", "COLOR_PALET": "BL-NA-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "855", "LARGO": "826", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "857", "LARGO": "839", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "857", "LARGO": "850", "COLOR_PALET": "VE-VE-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "857", "LARGO": "974", "COLOR_PALET": "NE-RO-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "860", "LARGO": "827", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "860", "LARGO": "839", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "864", "LARGO": "795", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "864", "LARGO": "827", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "864", "LARGO": "901", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "864", "LARGO": "943", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "868", "LARGO": "901", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "868", "LARGO": "926", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "868", "LARGO": "975", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "868", "LARGO": "1000", "COLOR_PALET": "BL-NA-BL // AZ-X-NE", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "869", "LARGO": "943", "COLOR_PALET": "AZ-X-NE // BL-NA-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "790", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "800", "COLOR_PALET": "NE-RO-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "817", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "824", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "826", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "VER", "OPCION": "1"}, {"ANCHO": "870", "LARGO": "826", "COLOR_PALET": "NE-RO-NE", "COLOR_DOULITE": "VER", "OPCION": "2"}, {"ANCHO": "870", "LARGO": "839", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "874", "LARGO": "839", "COLOR_PALET": "AZ-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "874", "LARGO": "926", "COLOR_PALET": "NE-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "876", "LARGO": "827", "COLOR_PALET": "VE-RO-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "876", "LARGO": "926", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "876", "LARGO": "1091", "COLOR_PALET": "X-X-X", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "877", "LARGO": "887", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "880", "LARGO": "927", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "882", "LARGO": "744", "COLOR_PALET": "RO-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "882", "LARGO": "838", "COLOR_PALET": "NE-NE-BL", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "888", "LARGO": "827", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "888", "LARGO": "831", "COLOR_PALET": "VE-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "888", "LARGO": "887", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "889", "LARGO": "850", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "889", "LARGO": "861", "COLOR_PALET": "VE-VE-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "891", "LARGO": "920", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "892", "LARGO": "673", "COLOR_PALET": "NA-X-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "895", "LARGO": "680", "COLOR_PALET": "NA-X-NA // VE-X-NA", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "898", "LARGO": "865", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "899", "LARGO": "943", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "900", "LARGO": "673", "COLOR_PALET": "VE-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "900", "LARGO": "725", "COLOR_PALET": "VE-X-RO", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "901", "LARGO": "868", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "901", "LARGO": "887", "COLOR_PALET": "BL-VE-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "902", "LARGO": "827", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "905", "LARGO": "786", "COLOR_PALET": "VE-BL-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "905", "LARGO": "817", "COLOR_PALET": "VE-VE-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "905", "LARGO": "827", "COLOR_PALET": "BL-BL-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "905", "LARGO": "868", "COLOR_PALET": "VE-VE-VE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "905", "LARGO": "876", "COLOR_PALET": "RO-BL-VE", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "906", "LARGO": "827", "COLOR_PALET": "BL-BL-NE", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "908", "LARGO": "827", "COLOR_PALET": "AZ-X-AZ // AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "908", "LARGO": "827", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "2"}, {"ANCHO": "909", "LARGO": "876", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "909", "LARGO": "878", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "909", "LARGO": "943", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "910", "LARGO": "826", "COLOR_PALET": "AZ-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "911", "LARGO": "834", "COLOR_PALET": "AZ-X-GR", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "912", "LARGO": "831", "COLOR_PALET": "AZ-X-GR", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "914", "LARGO": "834", "COLOR_PALET": "AZ-X-GR", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "914", "LARGO": "923", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "914", "LARGO": "926", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "914", "LARGO": "1112", "COLOR_PALET": "X-AM-X", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "915", "LARGO": "831", "COLOR_PALET": "AZ-X-GR", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "916", "LARGO": "926", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "918", "LARGO": "827", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "924", "LARGO": "795", "COLOR_PALET": "BL-BL-NE", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "924", "LARGO": "795", "COLOR_PALET": "BL-BL-NE", "COLOR_DOULITE": "ROJ", "OPCION": "2"}, {"ANCHO": "924", "LARGO": "854", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "752", "COLOR_PALET": "BL-BL-NE", "COLOR_DOULITE": "AZU", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "784", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "876", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "902", "COLOR_PALET": "NA-X-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "914", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "931", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "950", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "926", "LARGO": "1035", "COLOR_PALET": "NE-NE-AZ", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "927", "LARGO": "1055", "COLOR_PALET": "X-NE-X", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "928", "LARGO": "827", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "928", "LARGO": "1050", "COLOR_PALET": "X-VE-X", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "928", "LARGO": "1055", "COLOR_PALET": "X-NE-X", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "930", "LARGO": "900", "COLOR_PALET": "RO-RO-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "931", "LARGO": "900", "COLOR_PALET": "RO-RO-AZ", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "931", "LARGO": "901", "COLOR_PALET": "RO-RO-AZ", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "931", "LARGO": "950", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "931", "LARGO": "975", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "933", "LARGO": "885", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "933", "LARGO": "890", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "936", "LARGO": "865", "COLOR_PALET": "RO-RO-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "943", "LARGO": "846", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "943", "LARGO": "864", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "943", "LARGO": "877", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "944", "LARGO": "856", "COLOR_PALET": "BL-NA-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "739", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "752", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "AZU", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "783", "COLOR_PALET": "RO-X-AM", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "806", "COLOR_PALET": "AZ-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "807", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "809", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "818", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "827", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "831", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "834", "COLOR_PALET": "RO-X-AM", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "870", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "885", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "888", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "914", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "918", "COLOR_PALET": "AZ-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "926", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "928", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "931", "COLOR_PALET": "VE-X-RO", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "931", "COLOR_PALET": "AM-X-NA // BL-RO-BL", "COLOR_DOULITE": "GRI", "OPCION": "2"}, {"ANCHO": "950", "LARGO": "943", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "950", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "967", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "991", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "1019", "COLOR_PALET": "AZ-NE-NE", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "1035", "COLOR_PALET": "AZ-NE-NE", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "950", "LARGO": "1112", "COLOR_PALET": "AZ-NE-NE", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "954", "LARGO": "750", "COLOR_PALET": "NA-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "954", "LARGO": "888", "COLOR_PALET": "NE-NA-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "954", "LARGO": "931", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "954", "LARGO": "936", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "954", "LARGO": "1042", "COLOR_PALET": "AZ-NE-NE", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "958", "LARGO": "917", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "960", "LARGO": "815", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "960", "LARGO": "850", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "962", "LARGO": "936", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "967", "LARGO": "784", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "967", "LARGO": "800", "COLOR_PALET": "NA-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "967", "LARGO": "960", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "967", "LARGO": "1035", "COLOR_PALET": "AZ-NE-NE", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "732", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "738", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "AMA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "753", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "AZU", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "774", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "796", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "801", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "805", "COLOR_PALET": "RO-X-AM", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "818", "COLOR_PALET": "NA-X-RO // AZ-X-RO", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "843", "COLOR_PALET": "AM-NE-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "846", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "878", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "881", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "971", "LARGO": "950", "COLOR_PALET": "BL-RO-BL // AM-RO-BL", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "974", "LARGO": "763", "COLOR_PALET": "AM-VE-AM", "COLOR_DOULITE": "AZU", "OPCION": "1"}, {"ANCHO": "974", "LARGO": "895", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "974", "LARGO": "926", "COLOR_PALET": "AM-X-NA", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "975", "LARGO": "901", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "GRI", "OPCION": "1"}, {"ANCHO": "975", "LARGO": "905", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "975", "LARGO": "944", "COLOR_PALET": "NE-BL-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "975", "LARGO": "965", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "976", "LARGO": "931", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "976", "LARGO": "944", "COLOR_PALET": "NE-BL-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "991", "LARGO": "933", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "992", "LARGO": "850", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "992", "LARGO": "866", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "992", "LARGO": "869", "COLOR_PALET": "AZ-X-NE", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "1000", "LARGO": "783", "COLOR_PALET": "RO-X-AM", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1000", "LARGO": "868", "COLOR_PALET": "NE-X-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1000", "LARGO": "936", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "783", "COLOR_PALET": "BL-RO-AZ", "COLOR_DOULITE": "ROJ", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "784", "COLOR_PALET": "AM-X-RO", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "813", "COLOR_PALET": "BL-BL-AZ", "COLOR_DOULITE": "NAR", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "890", "COLOR_PALET": "NE-X-AZ", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "960", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1002", "LARGO": "967", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1004", "LARGO": "757", "COLOR_PALET": "AZ-X-NA", "COLOR_DOULITE": "AZU", "OPCION": "1"}, {"ANCHO": "1004", "LARGO": "890", "COLOR_PALET": "X-BL-X", "COLOR_DOULITE": "BLA", "OPCION": "1"}, {"ANCHO": "1004", "LARGO": "936", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NEG", "OPCION": "1"}, {"ANCHO": "1019", "LARGO": "954", "COLOR_PALET": "BL-RO-BL", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1019", "LARGO": "967", "COLOR_PALET": "AZ-AZ-NE", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1035", "LARGO": "954", "COLOR_PALET": "NE-NE-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1035", "LARGO": "957", "COLOR_PALET": "NE-NE-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1042", "LARGO": "868", "COLOR_PALET": "X-X-X", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}, {"ANCHO": "1042", "LARGO": "954", "COLOR_PALET": "NE-NE-AZ", "COLOR_DOULITE": "NO LLEVA", "OPCION": "1"}];
-
-const ALIAS = { BI:"BL", BLA:"BL", AZU:"AZ", NEG:"NE", NG:"NE", VER:"VE", ROJ:"RO", AMA:"AM", GRI:"GR", NAR:"NA" };
-const INFO = {
-  AZ:{n:"Azul",h:"#2563eb"},
-  NE:{n:"Negro",h:"#111827"},
-  VE:{n:"Verde",h:"#16a34a"},
-  NA:{n:"Naranja",h:"#f97316"},
-  RO:{n:"Rojo",h:"#dc2626"},
-  BL:{n:"Blanco",h:"#e5e7eb",t:"#111827"},
-  AM:{n:"Amarillo",h:"#facc15",t:"#111827"},
-  GR:{n:"Gris",h:"#64748b"},
-  X:{n:"Madera",h:"#a16207"},
-  "NO LLEVA":{n:"Sin Doulite",h:"#374151"}
+const sounds = {
+  click: new Audio('soft click.mp3'),
+  success: new Audio('ui success.mp3'),
+  error: new Audio('soft error.mp3'),
+  notification: new Audio('ui notification.mp3')
 };
-
-function num(v) {
-  return String(v ?? "").trim().replace(/^0+/, "") || "0";
+Object.values(sounds).forEach(a=>{a.preload='auto'; a.volume=0.45;});
+function soundOn(){return localStorage.getItem('paletsSound')==='1';}
+function vibrateOn(){return localStorage.getItem('paletsVibration')!=='0';}
+function playSound(name){
+  if(!soundOn() || !sounds[name]) return;
+  try{sounds[name].currentTime=0; sounds[name].play().catch(()=>{});}catch(e){}
 }
-function txt(v) {
-  return String(v ?? "").trim().toUpperCase();
+function vib(ms=35){if(vibrateOn() && navigator.vibrate) navigator.vibrate(ms);}
+function setTheme(t){localStorage.setItem('paletsTheme',t);applySettings();playSound('click');}
+function setSize(s){localStorage.setItem('paletsSize',s);applySettings();playSound('click');}
+function toggleSound(){localStorage.setItem('paletsSound', soundOn()?'0':'1');applySettings(); if(soundOn()) playSound('click');}
+function toggleVibration(){localStorage.setItem('paletsVibration', vibrateOn()?'0':'1');applySettings();vib(45);}
+function animationsOn(){return localStorage.getItem('paletsAnimations')!=='0';}
+function toggleAnimations(){localStorage.setItem('paletsAnimations', animationsOn()?'0':'1');applySettings();playSound('click');}
+function applySettings(){
+  const theme=localStorage.getItem('paletsTheme')||'blue';
+  const size=localStorage.getItem('paletsSize')||'normal';
+  document.body.setAttribute('data-theme',theme);
+  document.body.classList.toggle('size-big',size==='big');
+  document.body.classList.toggle('no-anim',!animationsOn());
+  document.querySelectorAll('[data-theme-btn]').forEach(b=>b.classList.toggle('active',b.dataset.themeBtn===theme));
+  document.querySelectorAll('[data-size-btn]').forEach(b=>b.classList.toggle('active',b.dataset.sizeBtn===size));
+  const st=document.getElementById('soundToggle'); if(st) st.classList.toggle('on',soundOn());
+  const vt=document.getElementById('vibrationToggle'); if(vt) vt.classList.toggle('on',vibrateOn());
+  const at=document.getElementById('animationsToggle'); if(at) at.classList.toggle('on',animationsOn());
 }
-function canon(c) {
-  c = txt(c);
-  return ALIAS[c] || c;
-}
-function parts(v) {
-  const s = txt(v);
-  if (!s) return [];
-  if (s === "NO LLEVA") return ["NO LLEVA"];
-  return s
-    .replace(/\s*\/\/\s*/g, "-")
-    .replace(/\s*\/\s*/g, "-")
-    .replace(/\s*-\s*/g, "-")
-    .split("-")
-    .map(x => canon(x))
-    .filter(Boolean);
-}
-function info(c) {
-  c = canon(c);
-  return INFO[c] || {n:c, h:"#333"};
-}
-  function mostrarAvisoActualizacion() {
-  const aviso = document.createElement("div");
-  aviso.innerHTML = `
-    <div style="
-      position:fixed;
-      bottom:20px;
-      left:50%;
-      transform:translateX(-50%);
-      background:#111;
-      color:#fff;
-      padding:14px 18px;
-      border-radius:12px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.6);
-      font-weight:700;
-      z-index:9999;
-    ">
-      Nueva versión disponible 🔄
-      <button onclick="location.reload()" style="
-        margin-left:10px;
-        padding:6px 10px;
-        border:none;
-        border-radius:8px;
-        background:#facc15;
-        font-weight:800;
-      ">
-        Actualizar
-      </button>
-    </div>
-  `;
-  document.body.appendChild(aviso);
+function mostrarAvisoUpdate(){
+  const card=document.getElementById('updateCard');
+  if(!card || cambiosApp.length === 0) return;
+  const seen=localStorage.getItem('paletsVersionVista');
+  if(seen!==versionApp){
+    card.innerHTML=`<b>🆕 Actualización disponible · v${versionApp}</b><ul>${cambiosApp.map(c=>`<li>${c}</li>`).join('')}</ul>`;
+    card.classList.add('show');
   }
-function colorBlock(c) {
-  c = canon(c);
-  const i = info(c);
-  return `<div class="color-block" style="background:${i.h};color:${i.t || "#fff"}">
-    <div class="color-code">${c}</div>
-    <div class="color-name">${i.n}</div>
+}
+function marcarUpdateVista(){
+  if(localStorage.getItem('paletsVersionVista')!==versionApp){
+    localStorage.setItem('paletsVersionVista',versionApp);
+    playSound('notification');
+  }
+}
+function pintarHistorial(){
+  const box=document.getElementById('historialBox'); if(!box) return;
+  if(historialUpdates.length === 0){
+    box.innerHTML='<div class="label">Historial de actualizaciones</div><div class="preview">Todavía no hay actualizaciones registradas. Empezará a mostrarse cuando publiques la primera novedad.</div>';
+    return;
+  }
+  box.innerHTML='<div class="label">Historial de actualizaciones</div>'+historialUpdates.map(h=>`<div class="history-item"><b>v${h.v} · ${h.f}</b><p>${h.cambios.map(c=>'• '+c).join('<br>')}</p></div>`).join('');
+}
+let secretTaps=0, secretTimer=null, secretFail=0, secretLockUntil=0;
+function watermarkTap(){
+  secretTaps++;
+  clearTimeout(secretTimer);
+  secretTimer=setTimeout(()=>secretTaps=0,1200);
+  if(secretTaps>=5){secretTaps=0;openSecret();}
+}
+function openSecret(){
+  const m=document.getElementById('secretModal');
+  m.classList.add('show');
+  document.getElementById('secretCodeInput').value='';
+  document.getElementById('secretMsg').style.display='none';
+  setTimeout(()=>document.getElementById('secretCodeInput').focus(),150);
+}
+function closeSecret(){document.getElementById('secretModal').classList.remove('show');}
+function checkSecretCode(){
+  const now=Date.now();
+  const msg=document.getElementById('secretMsg');
+  if(now<secretLockUntil){msg.style.display='block';msg.innerHTML='⏳ Bloqueado unos minutos.';playSound('error');return;}
+  const code=(document.getElementById('secretCodeInput').value||'').trim().toUpperCase();
+  if(code==='RD268'){
+    secretFail=0;msg.style.display='block';msg.innerHTML='✅ Acceso correcto. Panel secreto en standby.';playSound('success');vib(60);
+  }else{
+    secretFail++;msg.style.display='block';msg.innerHTML='❌ Código incorrecto';playSound('error');vib(90);
+    if(secretFail>=2){secretLockUntil=Date.now()+10*60*1000;msg.innerHTML='⛔ 2 intentos fallidos. Bloqueado 10 minutos.';}
+  }
+}
+function go(id){
+  playSound('click');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='menu') marcarUpdateVista();
+  if(id==='material') setTimeout(()=>p1.focus(),250);
+  if(id==='medidas') setTimeout(()=>document.getElementById('anchoPalet').focus(),250);
+  if(id==='color') setTimeout(()=>document.getElementById('c1').focus(),250);
+  if(id==='historial') pintarHistorial();
+}
+
+const datosPalets = [
+  {
+    "ancho": "795",
+    "largo": "739",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "800",
+    "largo": "673",
+    "colores": [
+      "Verde",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "800",
+    "largo": "739",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "800",
+    "largo": "784",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "805",
+    "largo": "749",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "814",
+    "largo": "798",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "815",
+    "largo": "885",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "815",
+    "largo": "960",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "815",
+    "largo": "1025",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "815",
+    "largo": "1035",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "816",
+    "largo": "943",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "819",
+    "largo": "791",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "820",
+    "largo": "749",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "820",
+    "largo": "762",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "823",
+    "largo": "926",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "826",
+    "largo": "943",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "834",
+    "largo": "702",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "834",
+    "largo": "744",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "834",
+    "largo": "762",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "834",
+    "largo": "766",
+    "colores": [
+      "Naranja",
+      "Azul",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Azul",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "834",
+    "largo": "867",
+    "colores": [
+      "Blanco",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "835",
+    "largo": "759",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "839",
+    "largo": "673",
+    "colores": [
+      "Negro",
+      "Madera",
+      "Gris"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Madera",
+        "Gris"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "842",
+    "largo": "702",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "846",
+    "largo": "943",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "680",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "686",
+    "colores": [
+      "Rojo",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "702",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "714",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "748",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "759",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "762",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "766",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Azul"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "772",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "790",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "798",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "800",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "Marrón",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "805",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "823",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "827",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "834",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "853",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "864",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "868",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "926",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "944",
+    "colores": [
+      "Blanco",
+      "Naranja",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Naranja",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "850",
+    "largo": "944",
+    "colores": [
+      "Rojo",
+      "Naranja",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Naranja",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "852",
+    "largo": "790",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "852",
+    "largo": "974",
+    "colores": [
+      "Blanco",
+      "Naranja",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Naranja",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "855",
+    "largo": "826",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "857",
+    "largo": "839",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "857",
+    "largo": "850",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "857",
+    "largo": "974",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "860",
+    "largo": "827",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "860",
+    "largo": "839",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "864",
+    "largo": "795",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "864",
+    "largo": "827",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "864",
+    "largo": "901",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "864",
+    "largo": "943",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "868",
+    "largo": "901",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "868",
+    "largo": "926",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "868",
+    "largo": "975",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "868",
+    "largo": "1000",
+    "colores": [
+      "Blanco",
+      "Naranja",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Naranja",
+        "Blanco"
+      ],
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "869",
+    "largo": "943",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ],
+      [
+        "Blanco",
+        "Naranja",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "790",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "800",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "817",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "824",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "826",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "826",
+    "colores": [
+      "Negro",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "Verde",
+    "nota": ""
+  },
+  {
+    "ancho": "870",
+    "largo": "839",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "874",
+    "largo": "839",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "874",
+    "largo": "926",
+    "colores": [
+      "Negro",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "876",
+    "largo": "827",
+    "colores": [
+      "Verde",
+      "Rojo",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Rojo",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "876",
+    "largo": "926",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "876",
+    "largo": "1091",
+    "colores": [
+      "Madera",
+      "Madera",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Madera",
+        "Madera"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "876",
+    "largo": "913",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": "ORBIT / en pruebas"
+  },
+  {
+    "ancho": "877",
+    "largo": "887",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "880",
+    "largo": "927",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "882",
+    "largo": "744",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "882",
+    "largo": "838",
+    "colores": [
+      "Negro",
+      "Negro",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Negro",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "888",
+    "largo": "827",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "888",
+    "largo": "831",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "888",
+    "largo": "887",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "889",
+    "largo": "850",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "889",
+    "largo": "861",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "891",
+    "largo": "920",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "892",
+    "largo": "673",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "895",
+    "largo": "680",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Naranja"
+      ],
+      [
+        "Verde",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "898",
+    "largo": "865",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "899",
+    "largo": "943",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "900",
+    "largo": "673",
+    "colores": [
+      "Verde",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "900",
+    "largo": "725",
+    "colores": [
+      "Verde",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "901",
+    "largo": "868",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "901",
+    "largo": "887",
+    "colores": [
+      "Blanco",
+      "Verde",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Verde",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "902",
+    "largo": "827",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "905",
+    "largo": "786",
+    "colores": [
+      "Verde",
+      "Blanco",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Blanco",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "905",
+    "largo": "817",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "905",
+    "largo": "827",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "905",
+    "largo": "868",
+    "colores": [
+      "Verde",
+      "Verde",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Verde",
+        "Verde"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "905",
+    "largo": "876",
+    "colores": [
+      "Rojo",
+      "Blanco",
+      "Verde"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Blanco",
+        "Verde"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "906",
+    "largo": "827",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "908",
+    "largo": "827",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ],
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "908",
+    "largo": "827",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "909",
+    "largo": "876",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "909",
+    "largo": "878",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "909",
+    "largo": "943",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "910",
+    "largo": "826",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "911",
+    "largo": "834",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": "Palet La Rioja"
+  },
+  {
+    "ancho": "912",
+    "largo": "831",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Gris"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Gris"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "914",
+    "largo": "834",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Gris"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Gris"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "914",
+    "largo": "923",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "914",
+    "largo": "926",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "914",
+    "largo": "1112",
+    "colores": [
+      "Madera",
+      "Amarillo",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Amarillo",
+        "Madera"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "915",
+    "largo": "831",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Gris"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Gris"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "916",
+    "largo": "926",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "918",
+    "largo": "827",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "924",
+    "largo": "795",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "924",
+    "largo": "795",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "924",
+    "largo": "854",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "752",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "Azul",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "784",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "876",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "902",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "914",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "931",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "950",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "926",
+    "largo": "1035",
+    "colores": [
+      "Negro",
+      "Negro",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Negro",
+        "Azul"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "927",
+    "largo": "1055",
+    "colores": [
+      "Madera",
+      "Negro",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Negro",
+        "Madera"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "928",
+    "largo": "827",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "928",
+    "largo": "1050",
+    "colores": [
+      "Madera",
+      "Verde",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Verde",
+        "Madera"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "928",
+    "largo": "1055",
+    "colores": [
+      "Madera",
+      "Negro",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Negro",
+        "Madera"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "930",
+    "largo": "900",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "931",
+    "largo": "900",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Azul"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "931",
+    "largo": "901",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Azul"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "931",
+    "largo": "950",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "931",
+    "largo": "975",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "933",
+    "largo": "885",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "933",
+    "largo": "890",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "936",
+    "largo": "865",
+    "colores": [
+      "Rojo",
+      "Rojo",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Rojo",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "943",
+    "largo": "846",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "943",
+    "largo": "864",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "943",
+    "largo": "877",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "944",
+    "largo": "856",
+    "colores": [
+      "Blanco",
+      "Naranja",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Naranja",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "739",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "752",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Azul",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "783",
+    "colores": [
+      "Rojo",
+      "Madera",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Madera",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "806",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "807",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "809",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "818",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "827",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "831",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "834",
+    "colores": [
+      "Rojo",
+      "Madera",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Madera",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "870",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "885",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "888",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "914",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "918",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "926",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "928",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "931",
+    "colores": [
+      "Verde",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Verde",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "931",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ],
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "943",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "950",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "967",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "991",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "1019",
+    "colores": [
+      "Azul",
+      "Negro",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Negro",
+        "Negro"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "1035",
+    "colores": [
+      "Azul",
+      "Negro",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Negro",
+        "Negro"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "950",
+    "largo": "1112",
+    "colores": [
+      "Azul",
+      "Negro",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Negro",
+        "Negro"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "954",
+    "largo": "750",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "954",
+    "largo": "888",
+    "colores": [
+      "Negro",
+      "Naranja",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Naranja",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "954",
+    "largo": "931",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "954",
+    "largo": "936",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "954",
+    "largo": "1042",
+    "colores": [
+      "Azul",
+      "Negro",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Negro",
+        "Negro"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "958",
+    "largo": "917",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "960",
+    "largo": "815",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "960",
+    "largo": "850",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "962",
+    "largo": "936",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "967",
+    "largo": "784",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": ""
+  },
+  {
+    "ancho": "967",
+    "largo": "800",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "967",
+    "largo": "960",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "967",
+    "largo": "1035",
+    "colores": [
+      "Azul",
+      "Negro",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Negro",
+        "Negro"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "732",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "738",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Amarillo",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "753",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Azul",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "774",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "796",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "801",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "805",
+    "colores": [
+      "Rojo",
+      "Madera",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Madera",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "818",
+    "colores": [
+      "Naranja",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Naranja",
+        "Madera",
+        "Rojo"
+      ],
+      [
+        "Azul",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "843",
+    "colores": [
+      "Amarillo",
+      "Negro",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Negro",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "846",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "878",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "881",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "971",
+    "largo": "950",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ],
+      [
+        "Amarillo",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "974",
+    "largo": "763",
+    "colores": [
+      "Amarillo",
+      "Verde",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Verde",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "Azul",
+    "nota": ""
+  },
+  {
+    "ancho": "974",
+    "largo": "895",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "974",
+    "largo": "926",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "975",
+    "largo": "901",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Gris",
+    "nota": ""
+  },
+  {
+    "ancho": "975",
+    "largo": "905",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "975",
+    "largo": "944",
+    "colores": [
+      "Negro",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "975",
+    "largo": "965",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "976",
+    "largo": "931",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "976",
+    "largo": "944",
+    "colores": [
+      "Negro",
+      "Blanco",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Blanco",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "991",
+    "largo": "933",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "992",
+    "largo": "850",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "992",
+    "largo": "866",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "992",
+    "largo": "869",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Negro"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "1000",
+    "largo": "783",
+    "colores": [
+      "Rojo",
+      "Madera",
+      "Amarillo"
+    ],
+    "combos": [
+      [
+        "Rojo",
+        "Madera",
+        "Amarillo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1000",
+    "largo": "868",
+    "colores": [
+      "Negro",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1000",
+    "largo": "936",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1002",
+    "largo": "783",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Azul"
+      ]
+    ],
+    "duolite": "Rojo",
+    "nota": "Medida corregida"
+  },
+  {
+    "ancho": "1002",
+    "largo": "784",
+    "colores": [
+      "Amarillo",
+      "Madera",
+      "Rojo"
+    ],
+    "combos": [
+      [
+        "Amarillo",
+        "Madera",
+        "Rojo"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1002",
+    "largo": "813",
+    "colores": [
+      "Blanco",
+      "Blanco",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Blanco",
+        "Azul"
+      ]
+    ],
+    "duolite": "Naranja",
+    "nota": ""
+  },
+  {
+    "ancho": "1002",
+    "largo": "890",
+    "colores": [
+      "Negro",
+      "Madera",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Madera",
+        "Azul"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "1002",
+    "largo": "960",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1002",
+    "largo": "967",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1004",
+    "largo": "757",
+    "colores": [
+      "Azul",
+      "Madera",
+      "Naranja"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Madera",
+        "Naranja"
+      ]
+    ],
+    "duolite": "Azul",
+    "nota": ""
+  },
+  {
+    "ancho": "1004",
+    "largo": "890",
+    "colores": [
+      "Madera",
+      "Blanco",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Blanco",
+        "Madera"
+      ]
+    ],
+    "duolite": "Blanco",
+    "nota": ""
+  },
+  {
+    "ancho": "1004",
+    "largo": "936",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "Negro",
+    "nota": ""
+  },
+  {
+    "ancho": "1019",
+    "largo": "954",
+    "colores": [
+      "Blanco",
+      "Rojo",
+      "Blanco"
+    ],
+    "combos": [
+      [
+        "Blanco",
+        "Rojo",
+        "Blanco"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1019",
+    "largo": "967",
+    "colores": [
+      "Azul",
+      "Azul",
+      "Negro"
+    ],
+    "combos": [
+      [
+        "Azul",
+        "Azul",
+        "Negro"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1035",
+    "largo": "954",
+    "colores": [
+      "Negro",
+      "Negro",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Negro",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1035",
+    "largo": "957",
+    "colores": [
+      "Negro",
+      "Negro",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Negro",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1042",
+    "largo": "868",
+    "colores": [
+      "Madera",
+      "Madera",
+      "Madera"
+    ],
+    "combos": [
+      [
+        "Madera",
+        "Madera",
+        "Madera"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  },
+  {
+    "ancho": "1042",
+    "largo": "954",
+    "colores": [
+      "Negro",
+      "Negro",
+      "Azul"
+    ],
+    "combos": [
+      [
+        "Negro",
+        "Negro",
+        "Azul"
+      ]
+    ],
+    "duolite": "NO LLEVA",
+    "nota": ""
+  }
+];
+
+function normal(v){return String(v||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function canonColor(v){
+  const x = normal(v).replace(/[^a-z]/g,'');
+  const map = {
+    bl:'blanco', bla:'blanco', blanco:'blanco', blanca:'blanco',
+    az:'azul', azu:'azul', azul:'azul',
+    ne:'negro', neg:'negro', negro:'negro', negra:'negro',
+    ro:'rojo', roj:'rojo', rojo:'rojo', roja:'rojo',
+    am:'amarillo', ama:'amarillo', amarillo:'amarillo', amarilla:'amarillo',
+    na:'naranja', nar:'naranja', naranja:'naranja',
+    ve:'verde', ver:'verde', verde:'verde',
+    ma:'madera', mad:'madera', madera:'madera', mar:'marron', marron:'marron', marron:'marron', marrón:'marron',
+    gr:'gris', gri:'gris', gris:'gris'
+  };
+  return map[x] || x;
+}
+function prepararInputsColor(){
+  const ids=['c1','c2','c3'];
+  ids.forEach((id,idx)=>{
+    const el=document.getElementById(id);
+    el.addEventListener('input',()=>{
+      el.value = el.value.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑ]/g,'').slice(0,6);
+      if(el.value.length>=2 && idx<2) document.getElementById(ids[idx+1]).focus();
+    });
+    el.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter') buscarColorPalet();
+    });
+  });
+}
+prepararInputsColor();
+
+function hexColor(nombre){
+  const c=canonColor(nombre);
+  const map={
+    blanco:'#f8fafc', azul:'#2563eb', negro:'#020617', rojo:'#dc2626', amarillo:'#facc15', naranja:'#f97316', verde:'#16a34a', gris:'#64748b', madera:'#a16207', marron:'#7c3f16'
+  };
+  return map[c] || '#334155';
+}
+function textColor(nombre){
+  const c=canonColor(nombre);
+  return ['blanco','amarillo'].includes(c) ? '#111827' : '#ffffff';
+}
+function renderCombo(combo){
+  return `<div class="real-colors">${combo.map(c=>`<div class="real-color" style="background:${hexColor(c)};color:${textColor(c)}">${c}</div>`).join('')}</div>`;
+}
+function renderDoulite(d){
+  if(canonColor(d.duolite)==='nolleva' || normal(d.duolite)==='no lleva'){
+    return `<div class="real-duolite no-doulite"><span>Doulite</span><strong>NO LLEVA</strong></div>`;
+  }
+  return `<div class="real-duolite"><span>Doulite</span><strong>${d.duolite}</strong><span class="real-dot" style="background:${hexColor(d.duolite)}"></span></div>`;
+}
+function pintarPalet(d){
+  const combos = d.combos && d.combos.length ? d.combos : [d.colores];
+  return `<div class="ok">
+    <div class="result-title">Resultado palet</div>
+    <div class="row"><span>Medida</span><strong>${d.ancho} x ${d.largo}</strong></div>
+    ${combos.map((combo,i)=>`<div class="combo-title">Color palet${combos.length>1 ? ' opción '+(i+1) : ''}</div>${renderCombo(combo)}`).join('')}
+    ${renderDoulite(d)}
+    ${d.nota ? `<div class="row"><span>Nota</span><strong>${d.nota}</strong></div>` : ''}
   </div>`;
 }
-function douliteBadge(v) {
-  const c = (parts(v || "NO LLEVA")[0] || "NO LLEVA");
-  const i = info(c);
-  return `<div class="doulite"><span class="dot" style="background:${i.h}"></span><span>${c} · ${i.n}</span></div>`;
-}
-function buscar() {
-  document.getElementById("loadingScreen").classList.remove("hidden");
-  const a = num(document.getElementById("ancho").value);
-  const l = num(document.getElementById("largo").value);
-  const hits = DATA.filter(r => num(r.ANCHO) === a && num(r.LARGO) === l);
-  const result = document.getElementById("result");
-  setTimeout(() => {
+function distancia(a,b){a=String(a);b=String(b); return Math.abs(Number(a)-Number(b));}
 
-  if (!hits.length) {
-    result.innerHTML = `
-      <div class="status">
-        <div class="status-icon no">×</div>
-      <div class="status-text">Medida no encontrada (<b>${a} x ${l}</b>). Revisa ANCHO y LARGO.</div>
-      </div>`;
-    document.getElementById("loadingScreen").classList.add("hidden");
+function renderDouliteDot(valor){
+  const v = txt(valor);
+  if(v === "NO LLEVA" || v === "SIN" || v === "") return "";
+  return `<span class="dot" style="background:${colorHex(v)}"></span>`;
+}
+
+function buscarMedida(){
+  const a=document.getElementById('anchoPalet').value.replace(/\D/g,'');
+  const l=document.getElementById('largoPalet').value.replace(/\D/g,'');
+  const out=document.getElementById('resMedida');
+  if(!a || !l){out.innerHTML='<div class="error">Mete ancho y largo</div>';playSound('error');vib(80);return;}
+  const exact=datosPalets.find(d=>d.ancho===a && d.largo===l);
+  if(exact){out.innerHTML=pintarPalet(exact);playSound('success');vib(50);return;}
+  const cercanas=datosPalets.map(d=>({...d,score:distancia(a,d.ancho)+distancia(l,d.largo)})).sort((x,y)=>x.score-y.score).slice(0,3);
+  playSound('error');vib(80);
+  out.innerHTML=`<div class="error">No encontrado exacto<br><small>${a} x ${l}</small></div>`+
+    `<div class="ok" style="margin-top:12px"><div class="result-title">Sugerencias cercanas</div>`+
+    cercanas.map(d=>`<div class="row"><span>${d.ancho} x ${d.largo}</span><strong>${d.colores.join(' / ')}</strong></div>`).join('')+
+    `</div>`;
+}
+function limpiarMedida(){document.getElementById('anchoPalet').value='';document.getElementById('largoPalet').value='';document.getElementById('resMedida').innerHTML='';document.getElementById('anchoPalet').focus();}
+
+function buscarColorPalet(){
+  const vals=['c1','c2','c3'].map(id=>document.getElementById(id).value);
+  const out=document.getElementById('resColor');
+  if(vals.some(v=>!v.trim())){out.innerHTML='<div class="error">Mete los 3 colores</div>';playSound('error');vib(80);return;}
+
+  const buscados = vals.map(canonColor);
+  const found=datosPalets.filter(d=>{
+    const combos = d.combos && d.combos.length ? d.combos : [d.colores];
+    return combos.some(combo=>combo.length===3 && combo.every((c,i)=>canonColor(c)===buscados[i]));
+  });
+
+  if(!found.length){
+    out.innerHTML=`<div class="error">No hay medidas con esa combinación exacta<br><small>${vals.map(v=>v.toUpperCase()).join(' / ')}</small></div>`;
+    playSound('error');vib(80);
     return;
   }
 
-  saveQuick(a, l);
-
-  result.innerHTML = `
-    <div class="status">
-      <div class="status-icon ok">✓</div>
-      <div class="status-text">${hits.length} opción(es) para <b>${a} x ${l}</b></div>
-    </div>
-    ${hits.map((h, idx) => `
-      <div class="option">
-        <div class="option-head">
-          <div class="option-title">OPCIÓN ${h.OPCION || idx + 1}</div>
-          ${douliteBadge(h.COLOR_DOULITE)}
-        </div>
-        <div class="section-title">Color palet</div>
-        <div class="palette-grid">${parts(h.COLOR_PALET).map(colorBlock).join("")}
-        ${h.COLOR_PALET === "X-X-X" ? `
-<div style="
-  margin-top:16px;
-  font-size:40px;
-  font-weight:1000;
-  color:#facc15;
-  letter-spacing:4px;
-  text-shadow:0 4px 10px rgba(0,0,0,0.6);
-">
-  ORBIT
-</div>
-` : ""}
-        </div>
-      </div>
-    `).join("")}`;
-  document.getElementById("loadingScreen").classList.add("hidden");
-}, 1000);
-  }
-  
-function limpiar() {
-  document.getElementById("ancho").value = "";
-  document.getElementById("largo").value = "";
-  document.getElementById("ancho").focus();
-  document.getElementById("result").innerHTML = `
-    <div class="status">
-      <div class="status-icon ok">✓</div>
-      <div class="status-text">Listo. Mete una medida.</div>
-    </div>`;
-localStorage.removeItem("quickPalets");
-  document.getElementById("quick").innerHTML = "";
-  
+  playSound('success');vib(50);
+  out.innerHTML=`<div class="ok"><div class="result-title">Combinación exacta: ${vals.map(v=>v.toUpperCase()).join(' / ')}</div>`+
+    found.map(d=>`<div class="row"><span>${d.ancho} x ${d.largo}</span><strong>${d.duolite}</strong></div>`).join('')+
+    `</div>`;
 }
-  function cerrarTutorial() {
-  const t = document.getElementById("tutorial");
-  if (t) t.style.display = "none";
+function limpiarColorPalet(){
+  ['c1','c2','c3'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('resColor').innerHTML='';
+  document.getElementById('c1').focus();
 }
 
-function abrirTutorial() {
-  const t = document.getElementById("tutorial");
-  if (t) {
-    t.style.display = "flex";
-    t.scrollTop = 0;
-  }
-}
-  function mostrarUpdateModal() {
-  document.getElementById("updateModal").style.display = "flex";
-}
+const datos = [
+  {material:"300000-00004",color:"ROJ",desc:"MSX09180827 120TH500 D28/14 ST"},
+  {material:"300001-00008",color:"ROJ",desc:"MSX09180827 130TH480 D28/14 ST"},
+  {material:"300001-00011",color:"ROJ",desc:"MSX09180834 130TH480 D28/14 ST"},
+  {material:"300001-00017",color:"ROJ",desc:"MSX09180827 130TH480 E14 ST"},
 
-function cerrarUpdate() {
-  document.getElementById("updateModal").style.display = "none";
-}
-function saveQuick(a,l) {
-  let arr = [];
-  try { arr = JSON.parse(localStorage.getItem("quickPalets") || "[]"); } catch(e) {}
-  const key = `${a}x${l}`;
-  arr = arr.filter(x => x.key !== key);
-  arr.unshift({key,a,l});
-  arr = arr.slice(0,6);
-  localStorage.setItem("quickPalets", JSON.stringify(arr));
-  renderQuick();
-}
-function renderQuick() {
-  let arr = [];
-  try { arr = JSON.parse(localStorage.getItem("quickPalets") || "[]"); } catch(e) {}
-  document.getElementById("quick").innerHTML = arr.map(x => 
-    `<button onclick="ancho.value='${x.a}'; largo.value='${x.l}'; buscar();">${x.a} × ${x.l}</button>`
-  ).join("");
-}
-document.getElementById("ancho").addEventListener("keydown", e => { if(e.key === "Enter") document.getElementById("largo").focus(); });
-document.getElementById("largo").addEventListener("keydown", e => { if(e.key === "Enter") buscar(); });
-renderQuick();
+  {material:"300002-00011",color:"GRI",desc:"MSX09140926 140TH520 D112/56 ST"},
+  {material:"300002-00022",color:"NAR",desc:"MSX09500807 140TH620 E28 ST"},
+  {material:"300002-00024",color:"BLA",desc:"MSX09500885 140TH620 E28 ST"},
+  {material:"300002-00026",color:"GRI",desc:"MSX09500931 140TH620 E28 ST"},
+  {material:"300002-00031",color:"NEG",desc:"MSX09501019 140TH620 E28 ST"},
+  {material:"300002-00033",color:"NEG",desc:"MSX09501035 140TH620 E28 ST"},
+  {material:"300002-00034",color:"ROJ",desc:"MSX09670784 140TH620 E28 ST"},
+  {material:"300002-00036",color:"NEG",desc:"MSX09670960 140TH620 E28 ST"},
+  {material:"300002-00038",color:"ROJ",desc:"MSX10020783 140TH620 E28 ST"},
+  {material:"300002-00040",color:"NAR",desc:"MSX10020813 140TH620 E28 ST"},
+  {material:"300002-00049",color:"NEG",desc:"MSX09501099 140TH620 E28 ST"},
+  {material:"300002-00084",color:"NEG",desc:"MSX09670991 140TH620 E28 ST"},
 
-function ocultarLoading() {
-  const loading = document.getElementById("loading");
-  if (loading) {
-    loading.style.display = "none";
-  }
-}
+  {material:"300002-00086",color:"VER",desc:"MSX08500823 140TH580 ECCS ST"},
+  {material:"300002-00087",color:"NAR",desc:"MWX08500944 140TH580 ECCS ST"},
+  {material:"300002-00088",color:"MAR",desc:"MWX08500790 140TH580 ECCS ST"},
+  {material:"300002-00089",color:"MAR",desc:"MWX08500762 140TH580 ECCS ST"},
+  {material:"300002-00090",color:"NAR",desc:"MSX08500949 140TH580 ECCS ST"},
+  {material:"300002-00093",color:"MAR",desc:"MWX08200749 140TH580 ECCS ST"},
 
-setTimeout(ocultarLoading, 1200);
-window.addEventListener("load", function() {
-  setTimeout(ocultarLoading, 200);
+  {material:"300002-00095",color:"NEG",desc:"MSX09501091 140TH620 E28 ST"},
+  {material:"300002-00096",color:"NEG",desc:"MSX09501002 140TH620 E28 ST"},
+  {material:"300002-00097",color:"NEG",desc:"MSX09500991 140TH620 E28 ST"},
+  {material:"300002-00099",color:"AZU",desc:"MSX09500752 140TH620 E28 ST"},
+
+  {material:"300002-00100",color:"BLA",desc:"MSX08761091 140TH620 D28/20 FS"},
+  {material:"300002-00102",color:"NEG",desc:"MSX09501112 140TH620 D28/20 ST"},
+  {material:"300002-00104",color:"BLA",desc:"MSX10040890 140TH580 D28/20 FS"},
+  {material:"300002-00105",color:"NEG",desc:"MSX09141112 140TH620 D28/20 FS"},
+  {material:"300002-00106",color:"NEG",desc:"MWX09261055 140TH620 D28/20 ST"},
+  {material:"300002-00108",color:"NEG",desc:"MSX09670931 140TH620 E28 ST"},
+  {material:"300002-00109",color:"NEG",desc:"MSX09671035 140TH620 E28 ST"},
+
+  {material:"300002-00113",color:"GRI",desc:"MSX09140950 140TH620 D28/20 FS"},
+  {material:"300002-00114",color:"GRI",desc:"MSX09140931 140TH620 D28/20 FS"},
+  {material:"300002-00115",color:"NEG",desc:"MSX09141035 140TH620 D28/20 FS"},
+  {material:"300002-00116",color:"NEG",desc:"MSX10040950 140TH580 D28/20 FS"},
+  {material:"300002-00117",color:"NEG",desc:"MSX10040936 140TH580 D28/20 FS"},
+  {material:"300002-00118",color:"AZU",desc:"MSX10040757 140TH580 D28/20 FS"},
+{material:"300002-00119",color:"AZU",desc:"MSX09140752 140TH620 D28/20 FS"},
+{material:"300002-00120",color:"GRI",desc:"MSX09260931 140TH620 D28/20 ST"},
+{material:"300002-00121",color:"AZU",desc:"MSX09260752 140TH620 D28/20 ST"},
+{material:"300002-00122",color:"GRI",desc:"MSX09260950 140TH620 D28/20 ST"},
+{material:"300002-00124",color:"NEG",desc:"MSX09261035 140TH620 D28/20 ST"},
+{material:"300002-00125",color:"BLA",desc:"MSX09260885 140TH620 D28/20 ST"},
+{material:"300002-00127",color:"GRI",desc:"MSX09310950 140TH580 ECCS ST"},
+{material:"300002-00128",color:"NEG",desc:"MWX09271055 140TH620 D28/20 ST"},
+{material:"300002-00130",color:"NEG",desc:"MWX09281055 140TH620 D28/20 ST"},
+{material:"300002-00132",color:"GRI",desc:"MSX09500931 140TH620 E28 ST CR-FREE"},
+{material:"300002-00135",color:"NEG",desc:"MWX09311055 140TH580 ECCS ST"},
+{material:"300002-00136",color:"NEG",desc:"MSX09670960 140TH620 D28/20 ST"},
+{material:"300002-00137",color:"NAR",desc:"MSX09500807 140TH620 D28/20 ST"},
+{material:"300002-00139",color:"NEG",desc:"MSX09501019 140TH620 D28/20 ST"},
+{material:"300002-00140",color:"NEG",desc:"MSX09501035 140TH620 D28/20 ST"},
+{material:"300002-00142",color:"BLA",desc:"MSX10020890 140TH620 E28 ST"},
+{material:"300002-00143",color:"GRI",desc:"MSX09500931 140TH620 D28/20 ST"},
+{material:"300002-00147",color:"NEG",desc:"MSX09500991 140TH620 D28/20 ST"},
+{material:"300002-00148",color:"BLA",desc:"MSX09500885 140TH620 D28/20 ST"},
+{material:"300003-00011",color:"VER",desc:"MSX08600827 150TH520 D28/14 ST"},
+{material:"300003-00029",color:"GRI",desc:"MSX09140926 150TH520 D28/14 ST"},
+{material:"300003-00050",color:"ROJ",desc:"MSX09180827 150TH480 E28 ST"},
+{material:"300003-00060",color:"VER",desc:"MSX08600834 150TH520 D28/14 ST"},
+{material:"300003-00061",color:"NAR",desc:"MSX09430820 150TH550 E28 ST"},
+{material:"300003-00063",color:"NEG",desc:"MSX09281050 150TH620 D28/20 FS"},
+{material:"300003-00064",color:"NEG",desc:"MWX09261055 150TH620 D28/20 ST"},
+{material:"300003-00066",color:"GRI",desc:"MSX09430926 150TH550 E28 ST"},
+{material:"300003-00068",color:"NEG",desc:"MSX09261042 150TH620 D28/20 ST"},
+{material:"300003-00069",color:"NEG",desc:"MSX09260975 150TH620 D28/20 ST"},
+{material:"300003-00070",color:"NEG",desc:"MSX09281042 150TH620 D28/20 FS"},
+{material:"300003-00071",color:"NEG",desc:"MSX09280975 150TH620 D28/20 FS"},
+{material:"300003-00073",color:"NEG",desc:"MSX09500975 150TH620 D28/20 FS"},
+{material:"300003-00074",color:"NEG",desc:"MSX09501042 150TH620 D28/20 FS"},
+{material:"300003-00075",color:"GRI",desc:"MSX09260931 150TH620 D28/20 ST"},
+{material:"300003-00077",color:"NEG",desc:"MWX09271055 150TH620 D28/20 ST"},
+{material:"300003-00079",color:"NEG",desc:"MWX09281055 150TH620 D28/20 ST"},
+{material:"300004-00003",color:"MAR",desc:"MSX08500766 160TH480 ECCS ST"},
+{material:"300004-00005",color:"VER",desc:"MSX08500823 160TH580 E28 ST"},
+{material:"300004-00006",color:"VER",desc:"MSX08500826 160TH330 ECCS ST"},
+{material:"300004-00008",color:"VER",desc:"MSX08500827 160TH520 D28/14 ST"},
+{material:"300004-00018",color:"ROJ",desc:"MSX08680901 160TH580 E28 ST"},
+{material:"300004-00020",color:"ROJ",desc:"MSX08680926 160TH580 E28 ST"},
+{material:"300004-00021",color:"NAR",desc:"MSX08681000 160TH580 E28 ST"},
+  {material:"300004-00023",color:"VER",desc:"MSX08700826 160TH330 ECCS ST"},
+{material:"300004-00041",color:"ROJ",desc:"MSX09060827 160TH520 D28/14 ST"},
+{material:"300004-00047",color:"GRI",desc:"MSX09140926 160TH520 D112/56 ST"},
+{material:"300004-00061",color:"AMA",desc:"MWX08000784 160TH520 E28 ST"},
+{material:"300004-00062",color:"AMA",desc:"MWX08050749 160TH580 ECCS ST"},
+{material:"300004-00063",color:"MAR",desc:"MWX08190791 160TH330 E28 ST"},
+{material:"300004-00064",color:"MAR",desc:"MWX08200749 160TH580 E28 ST"},
+{material:"300004-00065",color:"MAR",desc:"MWX08200749 160TH580 ECCS ST"},
+{material:"300004-00066",color:"MAR",desc:"MWX08200762 160TH580 E28 ST"},
+{material:"300004-00067",color:"MAR",desc:"MWX08200762 160TH580 ECCS ST"},
+{material:"300004-00068",color:"AMA",desc:"MWX08340702 160TH480 ECCS ST"},
+{material:"300004-00070",color:"AMA",desc:"MWX08500714 160TH330 E28 ST"},
+{material:"300004-00071",color:"AMA",desc:"MWX08500714 160TH330 ECCS ST"},
+{material:"300004-00072",color:"AMA",desc:"MWX08500714 160TH480 ECCS ST"},
+{material:"300004-00073",color:"AMA",desc:"MWX08500714 160TH520 D28/14 ST"},
+{material:"300004-00075",color:"MAR",desc:"MWX08500748 160TH330 ECCS ST"},
+{material:"300004-00080",color:"MAR",desc:"MWX08500790 160TH580 E28 ST"},
+{material:"300004-00081",color:"MAR",desc:"MWX08500790 160TH580 ECCS ST"},
+{material:"300004-00085",color:"VER",desc:"MWX08700817 160TH330 ECCS ST"},
+{material:"300004-00121",color:"NAR",desc:"MWX08500944 160TH580 ECCS ST"},
+{material:"300004-00123",color:"MAR",desc:"MSX08500800 160TH580 E28 ST"},
+{material:"300004-00125",color:"ROJ",desc:"MSX08890851 160TH580 ECCS ST"},
+{material:"300004-00126",color:"BLA",desc:"MSX08890927 160TH580 ECCS ST"},
+{material:"300004-00128",color:"ROJ",desc:"MWX09050876 160TH580 ECCS ST"},
+{material:"300004-00131",color:"BLA",desc:"MWX09310900 160TH580 ECCS ST"},
+{material:"300004-00132",color:"GRI",desc:"MSX09500926 160TH520 E56 ST"},
+{material:"300004-00158",color:"AMA",desc:"MSX08340744 160TH480 ECCS ST"},
+{material:"300004-00160",color:"MAR",desc:"MWX08500762 160TH580 E28 ST"},
+{material:"300004-00161",color:"MAR",desc:"MWX08500762 160TH580 ECCS ST"},
+{material:"300004-00167",color:"AZU",desc:"MWX08700748 160TH330 ECCS ST"},
+{material:"300004-00172",color:"AMA",desc:"MWX08500702 160TH480 ECCS ST"},
+{material:"300004-00175",color:"BLA",desc:"MSX08761091 160TH580 D28/20 FS"},
+{material:"300004-00177",color:"VER",desc:"MSX08700875 160TH330 ECCS ST"},
+{material:"300004-00181",color:"VER",desc:"MSX08700857 160TH330 ECCS ST"},
+{material:"300004-00182",color:"AMA",desc:"MWX08500714 160TH580 ECCS ST"},
+{material:"300004-00188",color:"GRI",desc:"MWX09310901 160TH580 ECCS ST"},
+{material:"300004-00189",color:"GRI",desc:"MSX09140926 160TH520 D28/56 ST"},
+{material:"300004-00196",color:"VER",desc:"MSX08500823 160TH580 ECCS ST"},
+{material:"300004-00198",color:"AMA",desc:"MWX08000784 160TH480 ECCS ST"},
+{material:"300004-00202",color:"VER",desc:"MWX08700824 160TH330 ECCS ST"},
+{material:"300004-00203",color:"AZU",desc:"MSX08700772 160TH330 ECCS ST"},
+{material:"300004-00209",color:"NAR",desc:"MSX09500834 160TH520 E56 ST"},
+{material:"300004-00211",color:"AMA",desc:"MSX08000766 160TH480 ECCS ST"},
+{material:"300004-00212",color:"AMA",desc:"MWX08030742 160TH580 E28 ST"},
+  {material:"300004-00218",color:"NAR",desc:"MSX09500795 160TH520 E56 ST"},
+{material:"300004-00221",color:"MAR",desc:"MSX08500800 160TH480 ECCS ST"},
+{material:"300004-00230",color:"BLA",desc:"MSX08760926 160TH580 D28/20 FS"},
+{material:"300004-00231",color:"ROJ",desc:"MSX08760901 160TH580 D28/20 FS"},
+{material:"300004-00232",color:"MAR",desc:"MSX08000850 160TH480 ECCS ST"},
+{material:"300004-00233",color:"NAR",desc:"MSX09530868 160TH580 D20/28 FS"},
+{material:"300004-00238",color:"NAR",desc:"MSX08681000 160TH580 D28/20 ST"},
+{material:"300004-00239",color:"ROJ",desc:"MSX08680926 160TH580 D28/20 ST"},
+{material:"300004-00240",color:"ROJ",desc:"MSX08680901 160TH580 D28/20 ST"},
+{material:"300004-00241",color:"ROJ",desc:"MSX08000926 160TH520 E28 ST"},
+{material:"300005-00002",color:"VER",desc:"MSX08600827 170TH550 D28/14 ST"},
+{material:"300005-00004",color:"VER",desc:"MSX08600831 170TH550 D28/14 ST"},
+{material:"300005-00020",color:"ROJ",desc:"MSX09240795 170TH550 E28 ST"},
+{material:"300005-00022",color:"SIN",desc:"MWX07950739 170TH460 E28 ST"},
+{material:"300005-00031",color:"MAR",desc:"MWX08500790 170TH460 E28 ST"},
+{material:"300005-00059",color:"NAR",desc:"MSX09430820 170TH550 E28 ST"},
+{material:"300005-00061",color:"NAR",desc:"MSX08200943 170TH550 D56/28 ST"},
+{material:"300005-00078",color:"AMA",desc:"MWX08500714 170TH460 E28 ST"},
+{material:"300005-00079",color:"GRI",desc:"MSX09430943 170TH550 E28 ST"},
+{material:"300005-00081",color:"GRI",desc:"MSX09240943 170TH550 E28 ST"},
+{material:"300005-00096",color:"AMA",desc:"MWX08030742 170TH460 E28 ST"},
+{material:"300005-00099",color:"AZU",desc:"MSX08700772 170TH460 ECCS ST"},
+{material:"300005-00103",color:"AMA",desc:"MWX08030739 170TH460 E28 ST"},
+{material:"300005-00104",color:"MAR",desc:"MWX08500762 170TH460 E28 ST"},
+{material:"300006-00016",color:"NAR",desc:"MSX08640943 180TH550 D28/56 ST"},
+{material:"300006-00035",color:"GRI",desc:"MSX09580917 180TH580 E28 ST"},
+{material:"300006-00041",color:"NAR",desc:"MSX09920866 180TH415 E28 ST"},
+{material:"300006-00042",color:"NAR",desc:"MSX09920866 180TH415 ECCS ST"},
+{material:"300006-00043",color:"NAR",desc:"MSX09920869 180TH415 E28 ST"},
+{material:"300006-00044",color:"NAR",desc:"MSX09920869 180TH415 ECCS ST"},
+{material:"300006-00098",color:"ROJ",desc:"MSX08820838 180TH415 ECCS ST"},
+{material:"300006-00099",color:"GRI",desc:"MSX09090943 180TH550 E56 ST"},
+{material:"300006-00149",color:"NAR",desc:"MSX09920866 180TH330 E28 ST"},
+{material:"300006-00177",color:"NAR",desc:"MSX09920869 180TH330 E28 ST"},
+{material:"300006-00182",color:"NAR",desc:"MSX08681000 180TH580 D28/20 ST"},
+{material:"300007-00001",color:"NAR",desc:"MSX08160943 190TH550 D28/56 ST"},
+{material:"300007-00010",color:"NAR",desc:"MSX08640943 190TH550 D112/56 ST"},
+{material:"300007-00065",color:"MAR",desc:"MSX08000854 190TH435 E28 ST"},
+{material:"300007-00091",color:"NAR",desc:"MSX08640943 190TH550 D28/56 ST"},
+{material:"300007-00114",color:"VER",desc:"MSX08640827 190TH550 D28/56 ST"},
+{material:"300007-00123",color:"VER",desc:"MSX08160827 190TH550 D28/56 ST"},
+{material:"300008-00010",color:"GRI",desc:"MSX09140926 200TH460 D28/14 ST"},
+{material:"300008-00011",color:"GRI",desc:"MSX09140926 200TH460 D56/28 ST"},
+{material:"300008-00049",color:"MAR",desc:"MSX08590787 200TS275 E56 ST"},
+  {material:"300008-00055",color:"GRI",desc:"MSX09140943 200TH460 D56/28 ST"},
+{material:"300009-00027",color:"GRI",desc:"MSX09500950 210TH550 E28 ST"},
+{material:"300009-00033",color:"AMA",desc:"MSX09710738 210TH550 E56 ST"},
+{material:"300009-00076",color:"NAR",desc:"MSX09710846 210TH460 D56/28 ST"},
+{material:"300009-00077",color:"BLA",desc:"MSX09710878 210TH460 E28 ST"},
+{material:"300009-00093",color:"GRI",desc:"MSX09500943 210TH550 E28 ST"},
+{material:"300009-00121",color:"NAR",desc:"MSX09710846 210TH460 E28 ST"},
+{material:"300009-00141",color:"NAR",desc:"MSX09710864 210TH460 E28 ST"},
+{material:"300010-00005",color:"AMA",desc:"MSX08950680 220TH330 E28 ST"},
+{material:"300010-00023",color:"NAR",desc:"MSX09710805 220TH460 D112/56 ST"},
+{material:"300010-00033",color:"AZU",desc:"MWX09740763 220TH330 E28 ST"},
+{material:"300010-00049",color:"AMA",desc:"MSX09000725 220TH330 ECCS ST"},
+{material:"300012-00005",color:"NAR",desc:"MSX09500818 240TH460 E28 ST"},
+{material:"300012-00008",color:"AMA",desc:"MSX09710738 240TH460 E56 ST"},
+{material:"300012-00010",color:"AZU",desc:"MSX09710753 240TH460 D112/56 ST"},
+{material:"300012-00013",color:"AZU",desc:"MSX09710753 240TH460 E56 ST"},
+{material:"300012-00015",color:"ROJ",desc:"MSX09710783 240TH460 E56 ST"},
+{material:"300012-00017",color:"NAR",desc:"MSX09710805 240TH460 E56 ST"},
+{material:"300012-00018",color:"NAR",desc:"MSX09710806 240TH460 E56 ST"},
+{material:"300012-00019",color:"NAR",desc:"MSX09710818 240TH460 E56 ST"},
+{material:"300012-00022",color:"NEG",desc:"MSX09710950 240TH460 E56 ST"},
+{material:"300012-00039",color:"NAR",desc:"MSX09710796 240TH460 E56 ST"},
+{material:"300012-00040",color:"BLA",desc:"MSX09710889 240TH460 E56 ST"},
+{material:"300012-00043",color:"GRI",desc:"MSX09500950 240TH460 E28 ST"},
+{material:"300012-00052",color:"ROJ",desc:"MSX09500783 240TH460 E28 ST"},
+{material:"300012-00055",color:"NAR",desc:"MSX09710846 240TH460 E56 ST"},
+{material:"300012-00061",color:"GRI",desc:"MSX09500928 240TH460 E28 ST"},
+{material:"300012-00065",color:"NEG",desc:"MSX09710928 240TH460 E56 ST"},
+{material:"300012-00067",color:"NAR",desc:"MSX09710834 240TH460 E56 ST"},
+{material:"300012-00070",color:"AZU",desc:"MSX09710755 240TH460 E56 ST"},
+{material:"300015-00003",color:"SIN",desc:"MSX08000673 270TS275 E28 ST"},
+{material:"300016-00020",color:"AMA",desc:"MSX09710732 280TH460 D112/56 ST"},
+{material:"300016-00021",color:"AMA",desc:"MSX09710732 280TH460 E56 ST"},
+{material:"300016-00026",color:"NAR",desc:"MSX09710801 280TH460 D112/56 ST"},
+{material:"300022-00003",color:"AMA",desc:"MSX08990735 320TH340 E28 ST"},
+{material:"300023-00001",color:"NEG",desc:"MSX09541042 155TH580 E28 ST"},
+{material:"300023-00003",color:"GRI",desc:"MSX09750901 155TH580 E28 ST"},
+{material:"300023-00004",color:"NEG",desc:"MSX09751042 155TH580 E28 ST"},
+{material:"300023-00005",color:"NEG",desc:"MSX09540975 155TH580 E28 ST"},
+{material:"300024-00001",color:"MAR",desc:"MSX08400768 205TS290 E56 ST"},
+{material:"300024-00002",color:"AZU",desc:"MSX09630766 205TS275 E56 ST"}
+];
+
+const p1 = document.getElementById("p1");
+const p2 = document.getElementById("p2");
+const res = document.getElementById("res");
+const preview = document.getElementById("preview");
+let timerBusqueda = null;
+
+p1.addEventListener("input", function(){
+  p1.value = p1.value.replace(/\D/g,"").slice(0,2);
+  actualizarPreview();
+  if(p1.value.length === 2) p2.focus();
 });
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(ocultarLoading, 1200);
+p2.addEventListener("input", function(){
+  p2.value = p2.value.replace(/\D/g,"").slice(0,3);
+  actualizarPreview();
+  clearTimeout(timerBusqueda);
+  if(p2.value.length === 3){
+    timerBusqueda = setTimeout(function(){buscar();p2.blur();}, 450);
+  }
 });
- let puntos = 0;
-setInterval(function() {
-  puntos = (puntos + 1) % 4;
-  const tc = document.getElementById("textoCarga");
-  if (tc) tc.innerText = "Cargando" + ".".repeat(puntos);
-}, 1250);
+function construirMaterial(){
+  const a = p1.value.padStart(2,"0");
+  const b = p2.value.padStart(3,"0");
+  return "3000" + a + "-00" + b;
+}
+function actualizarPreview(){preview.innerText = "Material: " + construirMaterial();}
+function colorBg(c){
+  if(c==="ROJ") return "#e53935";
+  if(c==="AMA") return "#facc15";
+  if(c==="VER") return "#22c55e";
+  if(c==="AZU") return "#2563eb";
+  if(c==="NEG") return "#000000";
+  if(c==="BLA") return "#f8fafc";
+  if(c==="GRI") return "#6b7280";
+  if(c==="NAR") return "#f97316";
+  if(c==="MAR") return "#7c3f16";
+  if(c==="SIN") return "#475569";
+  return "#555";
+}
+function parseDesc(desc){
+  try{
+    const partes = desc.trim().split(/\s+/);
+    const codigo = partes[0] || "";
+    const medidas = codigo.substring(3);
+    const tipoLetra = codigo.substring(1,2);
+    const tipoCorte = tipoLetra === "S" ? "Recto" : tipoLetra === "W" ? "Scroll" : "-";
+    const ancho = medidas.substring(0,4) || "-";
+    const largo = medidas.substring(4,8) || "-";
+    let espesor = "-", limite = "-";
+    if(partes[1] && partes[1].includes("TH")){const th = partes[1].split("TH");espesor = "0," + th[0].slice(0,2);limite = th[1];}
+    let diferencial = "-", estanado = "-";
+    const campo = partes[2] || "";
+    if(campo.includes("ECCS")){estanado = "TFS";diferencial = "-";}
+    else if(campo.includes("/")){diferencial = campo.split("/")[0].replace("D","");estanado = campo.split("/")[1];}
+    else if(campo.startsWith("E")){estanado = campo.replace("E","");}
+    else if(campo.startsWith("D")){diferencial = campo.replace("D","");}
+    const acabadoRaw = partes[3] || "-";
+    const acabado = acabadoRaw === "ST" ? "Piedra" : acabadoRaw;
+    return {tipoCorte,ancho,largo,espesor,limite,diferencial,estanado,acabado};
+  }catch(e){return {tipoCorte:"-",ancho:"-",largo:"-",espesor:"-",limite:"-",diferencial:"-",estanado:"-",acabado:"-"};}
+}
+function buscar(){
+  clearTimeout(timerBusqueda);
+  if(p1.value.length < 2 || p2.value.length < 3) return;
+  const material = construirMaterial();
+  const d = datos.find(x => x.material === material);
+  if(!d){res.innerHTML = `<div class="error">No encontrado ❌<br>Revisa el material<br><small>${material}</small></div>`;return;}
+  const info = parseDesc(d.desc);
+  if(navigator.vibrate) navigator.vibrate(50);
+  res.innerHTML = `
+    <div class="result"><div class="ok">
+      ${d.color==="SIN" ? `<div class="color-box no-lleva"><div>NO LLEVA</div><small>DUOLITE</small></div>` : `<div class="color-box" style="background:${colorBg(d.color)};${d.color==="NEG"||d.color==="BLA" ? "border:4px solid #94a3b8;" : ""}"></div>`}
+      <div class="result-title">Datos del material</div>
+      <div class="row"><span>Material</span><strong>${d.material}</strong></div>
+      <div class="row"><span>Tipo corte</span><strong>${info.tipoCorte}</strong></div>
+      <div class="row"><span>Ancho</span><strong>${info.ancho}</strong></div>
+      <div class="row"><span>Largo</span><strong>${info.largo}</strong></div>
+      <div class="row"><span>Espesor</span><strong>${info.espesor}</strong></div>
+      <div class="row"><span>Límite elástico</span><strong>${info.limite}</strong></div>
+      <div class="row"><span>Diferencial</span><strong>${info.diferencial}</strong></div>
+      <div class="row"><span>Estañado</span><strong>${info.estanado}</strong></div>
+      <div class="row"><span>Acabado</span><strong>${info.acabado}</strong></div>
+    </div></div>`;
+}
+function limpiar(){
+  clearTimeout(timerBusqueda);
+  p1.value = ""; p2.value = ""; res.innerHTML = ""; actualizarPreview(); p1.focus();
+}
+actualizarPreview();
+applySettings();
+mostrarAvisoUpdate();
+pintarHistorial();
 </script>
 
-<div id="tutorial" style="
-display:none;
-position:fixed;
-inset:0;
-z-index:99998;
-background:
-  radial-gradient(circle at 20% 0%, rgba(37,99,235,.32), transparent 34%),
-  radial-gradient(circle at 100% 8%, rgba(250,204,21,.18), transparent 28%),
-  linear-gradient(180deg,#061126,#081827 55%,#050914);
-color:white;
-overflow:auto;
-padding:18px;
-">
-  <div style="max-width:760px;margin:0 auto;padding:8px 0 24px;">
-    <div style="
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-    ">
-      <div>
-        <div style="
-          display:inline-flex;
-          align-items:center;
-          gap:8px;
-          border:1px solid rgba(125,211,252,.25);
-          background:rgba(59,130,246,.12);
-          color:#bfdbfe;
-          border-radius:999px;
-          padding:7px 11px;
-          font-size:12px;
-          font-weight:900;
-          letter-spacing:.08em;
-        ">PALETS PRO</div>
-
-        <div style="
-          font-size:34px;
-          font-weight:1000;
-          letter-spacing:-1px;
-          margin-top:8px;
-          line-height:1;
-        ">ℹ️ AYUDA</div>
-
-        <div style="
-          color:#aab7cf;
-          font-size:15px;
-          font-weight:700;
-          margin-top:7px;
-        ">Guía rápida de uso de la app.</div>
-      </div>
-
-      <button onclick="cerrarTutorial()" style="
-        border:1px solid rgba(255,255,255,.18);
-        background:rgba(255,255,255,.08);
-        color:white;
-        border-radius:16px;
-        padding:12px 14px;
-        font-size:14px;
-        font-weight:1000;
-        box-shadow:0 10px 24px rgba(0,0,0,.25);
-      ">VOLVER</button>
-    </div>
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    ">
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">📏</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">ANCHO</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Introduce la medida de ancho del palet.</div>
-      </div>
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">📐</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">LARGO</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Introduce la medida de largo del palet.</div>
-      </div>
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">🔎</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">BUSCAR</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Consulta la combinación exacta de ancho y largo.</div>
-      </div>
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">🔄</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">ACTUALIZAR</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Recarga la app para aplicar cambios o nuevas versiones.</div>
-      </div>
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">🧹</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">LIMPIAR</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Borra las medidas introducidas y deja la pantalla lista.</div>
-      </div>
-
-      <div style="background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">🎨</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">COLOR PALET</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Muestra los colores correspondientes al palet.</div>
-      </div>
-
-      <div style="grid-column:1/-1;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:16px;box-shadow:0 18px 40px rgba(0,0,0,.25);">
-        <div style="font-size:28px;margin-bottom:8px;">🔴</div>
-        <div style="font-size:20px;font-weight:1000;color:#facc15;">DOULITE</div>
-        <div style="margin-top:6px;color:#dbeafe;font-weight:700;line-height:1.35;">Indica el color de Doulite si esa medida lo lleva.</div>
-      </div>
-    </div>
-
-    <button onclick="cerrarTutorial()" style="
-      margin-top:16px;
-      width:100%;
-      padding:17px;
-      border:none;
-      border-radius:20px;
-      background:linear-gradient(135deg,#facc15,#ff7a18);
-      color:#111827;
-      font-size:20px;
-      font-weight:1000;
-      box-shadow:0 16px 34px rgba(249,115,22,.25);
-    ">VOLVER A LA APP</button>
-  </div>
-</div>
-
-<div id="loadingScreen" class="hidden">
-    <div class="spinner"></div>
-    <div class="loader-title">Consultando medidas...</div>
-    <div class="loader-subtitle">Buscando combinación de colores</div>
-  </div>
-  <div id="updateModal" style="
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:99999;
-">
-
-  <div style="
-    width:90%;
-    max-width:420px;
-    background:#0f172a;
-    border:1px solid rgba(255,255,255,0.18);
-    border-radius:22px;
-    padding:22px;
-    color:white;
-    box-shadow:0 14px 35px rgba(0,0,0,0.55);
-  ">
-
-    <div style="
-      font-size:22px;
-      font-weight:1000;
-      color:#facc15;
-      margin-bottom:16px;
-    ">
-      🆕 Actualización aplicada
-    </div>
-
-    <ul style="line-height:1.8; padding-left:20px; font-size:17px; font-weight:700;">
-      <li>🎨 Mejora de mensaje de actualización</li>
-      <li>➕ Añadir más funciones</li>
-      <li>⚙️ Mejoras de funcionamiento</li>
-    </ul>
-
-    <button onclick="cerrarUpdate()" style="
-      margin-top:22px;
-      width:100%;
-      padding:13px;
-      border:none;
-      border-radius:14px;
-      background:#facc15;
-      font-weight:1000;
-      color:#111;
-      font-size:16px;
-    ">
-      OK
-    </button>
-
-  </div>
-  </div>
+<script>
+(function(){
+  function quitarCargaInicial(){var l=document.getElementById('loading'); if(l) l.style.display='none';}
+  window.addEventListener('load',()=>setTimeout(quitarCargaInicial,500));
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(quitarCargaInicial,1600));
+  setTimeout(quitarCargaInicial,2500);
+})();
+</script>
 </body>
 </html>
-
-
