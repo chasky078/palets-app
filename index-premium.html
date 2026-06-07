@@ -375,7 +375,6 @@ h1,h2,h3{
   width:215px!important;
   max-width:68vw!important;
   height:auto!important;
-  margin-bottom:2px!important;
 }
 
 #splash .sonoco-brand{
@@ -1106,34 +1105,78 @@ body.mode-light .sonoco-brand .asturias{
   backdrop-filter:blur(10px);
 }
 
-.sonoco-text{
-    margin-top:-4px;
-    margin-bottom:10px;
-    text-align:center;
-    font-size:18px;
-    font-weight:1000;
-    letter-spacing:6px;
-    color:#ffd83d;
-    text-shadow:
-        0 0 10px rgba(255,216,61,.85),
-        0 2px 8px rgba(0,0,0,.55);
-}
-
-.asturias-box{
-    display:inline-block;
-    padding:6px 18px;
-    border-radius:14px;
-    background:#0057b8;
-    color:#ffd83d;
-    font-size:14px;
-    font-weight:1000;
-    letter-spacing:4px;
-    margin-top:8px;
-    box-shadow:0 0 20px rgba(0,87,184,.45);
+#splash .sonoco-flag span{
+  color:#ffd83d!important;
+  font-weight:1000!important;
+  letter-spacing:4px!important;
+  font-size:13px!important;
+  line-height:1.05;
+  text-shadow:
+    0 0 8px rgba(255,216,61,.55),
+    0 2px 5px rgba(0,0,0,.35)!important;
 }
 
 .screen:not(#splash) .sonoco-flag{
   display:none!important;
+}
+
+
+/* ===== DEFINITIVO SPLASH SONOCO / ASTURIAS ===== */
+#splash .sonoco-brand{
+  margin-top:-205px!important;
+  margin-bottom:4px!important;
+  transform:translateY(-82px)!important;
+}
+#splash .sonoco-brand img{
+  width:270px!important;
+  max-width:76vw!important;
+  height:auto!important;
+  margin-bottom:2px!important;
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.98))
+    drop-shadow(0 0 12px rgba(255,255,255,.62))
+    drop-shadow(0 0 30px rgba(0,0,0,.62))
+    drop-shadow(0 12px 28px rgba(0,0,0,.50))!important;
+}
+#splash .sonoco-text{
+  margin-top:-10px!important;
+  margin-bottom:9px!important;
+  text-align:center!important;
+  font-size:18px!important;
+  font-weight:1000!important;
+  letter-spacing:6px!important;
+  color:#0d47a1!important;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.70),
+    0 2px 8px rgba(0,0,0,.45)!important;
+}
+#splash .asturias-box{
+  display:inline-block!important;
+  padding:7px 20px!important;
+  border-radius:14px!important;
+  background:#0057b8!important;
+  color:#ffd83d!important;
+  font-size:14px!important;
+  font-weight:1000!important;
+  letter-spacing:4px!important;
+  margin:0 auto 8px auto!important;
+  box-shadow:
+    0 0 20px rgba(0,87,184,.45),
+    0 4px 12px rgba(0,0,0,.35)!important;
+  border:2px solid rgba(255,255,255,.20)!important;
+}
+.screen:not(#splash) .sonoco-text,
+.screen:not(#splash) .asturias-box{
+  display:none!important;
+}
+.screen:not(#splash) .sonoco-brand{
+  margin-top:8px!important;
+  margin-bottom:18px!important;
+  transform:none!important;
+}
+.screen:not(#splash) .sonoco-brand img{
+  width:115px!important;
+  max-width:34vw!important;
 }
 
 </style>
@@ -1142,12 +1185,11 @@ body.mode-light .sonoco-brand .asturias{
 
 <section id="splash" class="screen active">
   <div class="splash-content">
-    <div class="sonoco-brand" onclick="logoSecretTap()"><img src="logo-s.png" alt="SONOCO">
-      <div class="sonoco-text">SONOCO</div>
-<div class="asturias-box">
-ASTURIAS
-</div>
-    <h1 class="title">PALETS</h1>
+    <div class="sonoco-brand" onclick="logoSecretTap()"><img src="logo-s.png" alt="SONOCO"></div>
+    
+    <div class="sonoco-text">SONOCO</div>
+    <div class="asturias-box">ASTURIAS</div>
+<h1 class="title">PALETS</h1>
     <div class="under"></div>
     <p class="subtitle">Sistema inteligente<br>de búsqueda</p>
     <div class="by">By Rubén D. 268</div>
