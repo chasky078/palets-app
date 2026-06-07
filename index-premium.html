@@ -270,6 +270,671 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   filter:drop-shadow(0 10px 22px rgba(0,0,0,.45));
 }
 
+
+/* ===== FIX FINAL: LOGO, TEMAS GLOBALES Y SONIDO ERROR MATERIAL ===== */
+:root{
+  --theme-bg1:#06111f;
+  --theme-bg2:#020713;
+  --theme-card:rgba(8,18,34,.86);
+  --theme-accent:#2fc5ff;
+  --theme-accent2:#2864ff;
+}
+
+body.theme-blue{
+  --theme-bg1:#06111f;
+  --theme-bg2:#020713;
+  --theme-card:rgba(8,18,34,.86);
+  --theme-accent:#2fc5ff;
+  --theme-accent2:#2864ff;
+}
+body.theme-yellow{
+  --theme-bg1:#241a04;
+  --theme-bg2:#080600;
+  --theme-card:rgba(45,32,6,.86);
+  --theme-accent:#facc15;
+  --theme-accent2:#ff7a18;
+}
+body.theme-green{
+  --theme-bg1:#052018;
+  --theme-bg2:#020b08;
+  --theme-card:rgba(6,34,25,.86);
+  --theme-accent:#22c55e;
+  --theme-accent2:#0ea5e9;
+}
+body.theme-red{
+  --theme-bg1:#240707;
+  --theme-bg2:#090202;
+  --theme-card:rgba(40,9,9,.86);
+  --theme-accent:#ef4444;
+  --theme-accent2:#f97316;
+}
+body.theme-purple{
+  --theme-bg1:#17072f;
+  --theme-bg2:#070211;
+  --theme-card:rgba(27,11,52,.88);
+  --theme-accent:#a855f7;
+  --theme-accent2:#2864ff;
+}
+
+body{
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--theme-accent) 22%, transparent), transparent 30%),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--theme-accent2) 20%, transparent), transparent 32%),
+    linear-gradient(180deg,var(--theme-bg1),var(--theme-bg2) 58%,#02040b) !important;
+}
+
+.menu-bg,
+.screen:not(#splash){
+  background:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--theme-accent) 18%, transparent), transparent 34%),
+    linear-gradient(180deg,var(--theme-bg1),var(--theme-bg2)) !important;
+}
+
+.card,
+.search-card,
+.panel,
+.option,
+.result,
+.menu-card,
+.settings-card,
+.update-card,
+.normas-card,
+.help-card{
+  background:var(--theme-card)!important;
+  border-color:color-mix(in srgb, var(--theme-accent) 18%, rgba(255,255,255,.10))!important;
+}
+
+.primary-btn,
+.btn-main,
+.btn,
+.buscar,
+.secret-ok,
+.menu-btn.active,
+.theme-btn.active,
+.size-btn.active{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent2))!important;
+}
+
+.title,
+.label,
+.result-title,
+.section-title,
+.menu-title,
+.card-title,
+h1,h2,h3{
+  text-shadow:0 4px 18px rgba(0,0,0,.35);
+}
+
+.sonoco-brand{
+  margin-top:-34px!important;
+  margin-bottom:30px!important;
+  transform:translateY(-10px);
+}
+
+.sonoco-brand img{
+  width:215px!important;
+  max-width:68vw!important;
+  height:auto!important;
+}
+
+#splash .sonoco-brand{
+  margin-top:-78px!important;
+  margin-bottom:18px!important;
+  transform:translateY(-24px);
+}
+
+#splash .sonoco-brand img{
+  width:240px!important;
+  max-width:72vw!important;
+}
+
+.screen-top-brand img{
+  width:180px!important;
+  max-width:58vw!important;
+}
+
+.screen-top-brand{
+  margin-top:-18px!important;
+  margin-bottom:18px!important;
+}
+
+.asturias{
+  margin-top:2px!important;
+}
+
+/* Quitar cualquier resto del icono azul cuadrado */
+.mark,
+.mark span,
+.logo-mark,
+.menu-logo,
+.menu-logo .mark,
+.app-icon,
+.splash-icon{
+  display:none!important;
+}
+
+
+
+/* Fondo global de todas las pantallas, no solo ajustes */
+body.theme-blue,
+body.theme-yellow,
+body.theme-green,
+body.theme-red,
+body.theme-purple{
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--tema-accent) 22%, transparent), transparent 30%),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--tema-accent2) 18%, transparent), transparent 32%),
+    linear-gradient(180deg,var(--tema-bg-main),var(--tema-bg-deep) 58%,#02040b)!important;
+}
+
+body.theme-blue .screen:not(#splash),
+body.theme-yellow .screen:not(#splash),
+body.theme-green .screen:not(#splash),
+body.theme-red .screen:not(#splash),
+body.theme-purple .screen:not(#splash),
+body.theme-blue .menu-bg,
+body.theme-yellow .menu-bg,
+body.theme-green .menu-bg,
+body.theme-red .menu-bg,
+body.theme-purple .menu-bg,
+body.theme-blue .wrap,
+body.theme-yellow .wrap,
+body.theme-green .wrap,
+body.theme-red .wrap,
+body.theme-purple .wrap{
+  background:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--tema-accent) 18%, transparent), transparent 35%),
+    linear-gradient(180deg,var(--tema-bg-main),var(--tema-bg-deep))!important;
+}
+
+body.theme-blue .card,
+body.theme-yellow .card,
+body.theme-green .card,
+body.theme-red .card,
+body.theme-purple .card,
+body.theme-blue .result,
+body.theme-yellow .result,
+body.theme-green .result,
+body.theme-red .result,
+body.theme-purple .result,
+body.theme-blue .panel,
+body.theme-yellow .panel,
+body.theme-green .panel,
+body.theme-red .panel,
+body.theme-purple .panel,
+body.theme-blue .menu-card,
+body.theme-yellow .menu-card,
+body.theme-green .menu-card,
+body.theme-red .menu-card,
+body.theme-purple .menu-card,
+body.theme-blue .menu-btn,
+body.theme-yellow .menu-btn,
+body.theme-green .menu-btn,
+body.theme-red .menu-btn,
+body.theme-purple .menu-btn,
+body.theme-blue .option,
+body.theme-yellow .option,
+body.theme-green .option,
+body.theme-red .option,
+body.theme-purple .option{
+  background:var(--tema-card)!important;
+  border-color:var(--tema-border)!important;
+}
+
+body.theme-blue .primary-btn,
+body.theme-yellow .primary-btn,
+body.theme-green .primary-btn,
+body.theme-red .primary-btn,
+body.theme-purple .primary-btn,
+body.theme-blue .btn,
+body.theme-yellow .btn,
+body.theme-green .btn,
+body.theme-red .btn,
+body.theme-purple .btn,
+body.theme-blue .buscar,
+body.theme-yellow .buscar,
+body.theme-green .buscar,
+body.theme-red .buscar,
+body.theme-purple .buscar{
+  background:linear-gradient(90deg,var(--tema-accent),var(--tema-accent2))!important;
+}
+
+.theme-btn{
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+}
+.theme-btn.theme-active{
+  background:linear-gradient(90deg,var(--tema-accent),var(--tema-accent2))!important;
+  color:white!important;
+}
+
+
+/* ===== TEMA PRINCIPAL REAL DEFINITIVO ===== */
+html, body{
+  min-height:100%;
+}
+
+body{
+  --theme-bg-a:#071529;
+  --theme-bg-b:#020713;
+  --theme-bg-c:#00040c;
+  --theme-card-a:rgba(9,22,43,.94);
+  --theme-card-b:rgba(13,32,60,.90);
+  --theme-border:rgba(68,160,255,.22);
+  --theme-text:#ffffff;
+  --theme-muted:#b7c7df;
+  --theme-accent:#2fc5ff;
+  --theme-accent2:#2864ff;
+  background:linear-gradient(180deg,var(--theme-bg-a),var(--theme-bg-b) 55%,var(--theme-bg-c))!important;
+}
+
+body.theme-blue{
+  --theme-bg-a:#071529;
+  --theme-bg-b:#020713;
+  --theme-bg-c:#00040c;
+  --theme-card-a:rgba(9,22,43,.94);
+  --theme-card-b:rgba(13,32,60,.90);
+  --theme-border:rgba(68,160,255,.22);
+  --theme-accent:#2fc5ff;
+  --theme-accent2:#2864ff;
+}
+
+body.theme-yellow{
+  --theme-bg-a:#2b2105;
+  --theme-bg-b:#120c01;
+  --theme-bg-c:#060400;
+  --theme-card-a:rgba(52,38,7,.94);
+  --theme-card-b:rgba(73,52,10,.90);
+  --theme-border:rgba(250,204,21,.27);
+  --theme-accent:#facc15;
+  --theme-accent2:#ff8a18;
+}
+
+body.theme-green{
+  --theme-bg-a:#062719;
+  --theme-bg-b:#02110a;
+  --theme-bg-c:#000604;
+  --theme-card-a:rgba(6,43,29,.94);
+  --theme-card-b:rgba(9,62,41,.90);
+  --theme-border:rgba(34,197,94,.26);
+  --theme-accent:#22c55e;
+  --theme-accent2:#14b8a6;
+}
+
+body.theme-red{
+  --theme-bg-a:#2b0708;
+  --theme-bg-b:#120203;
+  --theme-bg-c:#070001;
+  --theme-card-a:rgba(55,11,12,.94);
+  --theme-card-b:rgba(77,16,17,.90);
+  --theme-border:rgba(239,68,68,.28);
+  --theme-accent:#ef4444;
+  --theme-accent2:#fb6b2b;
+}
+
+body.theme-purple{
+  --theme-bg-a:#1c0735;
+  --theme-bg-b:#090215;
+  --theme-bg-c:#030007;
+  --theme-card-a:rgba(34,12,64,.94);
+  --theme-card-b:rgba(50,18,91,.90);
+  --theme-border:rgba(168,85,247,.30);
+  --theme-accent:#a855f7;
+  --theme-accent2:#4f46e5;
+}
+
+/* Fondo completo de cualquier pantalla */
+body.theme-blue,
+body.theme-yellow,
+body.theme-green,
+body.theme-red,
+body.theme-purple,
+body.theme-blue .screen:not(#splash),
+body.theme-yellow .screen:not(#splash),
+body.theme-green .screen:not(#splash),
+body.theme-red .screen:not(#splash),
+body.theme-purple .screen:not(#splash),
+body.theme-blue .menu-bg,
+body.theme-yellow .menu-bg,
+body.theme-green .menu-bg,
+body.theme-red .menu-bg,
+body.theme-purple .menu-bg,
+body.theme-blue .wrap,
+body.theme-yellow .wrap,
+body.theme-green .wrap,
+body.theme-red .wrap,
+body.theme-purple .wrap,
+body.theme-blue .app,
+body.theme-yellow .app,
+body.theme-green .app,
+body.theme-red .app,
+body.theme-purple .app{
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--theme-accent) 24%, transparent), transparent 30%),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--theme-accent2) 20%, transparent), transparent 32%),
+    linear-gradient(180deg,var(--theme-bg-a),var(--theme-bg-b) 58%,var(--theme-bg-c))!important;
+}
+
+/* Tarjetas también cambian de color */
+body.theme-blue .card,
+body.theme-yellow .card,
+body.theme-green .card,
+body.theme-red .card,
+body.theme-purple .card,
+body.theme-blue .result,
+body.theme-yellow .result,
+body.theme-green .result,
+body.theme-red .result,
+body.theme-purple .result,
+body.theme-blue .panel,
+body.theme-yellow .panel,
+body.theme-green .panel,
+body.theme-red .panel,
+body.theme-purple .panel,
+body.theme-blue .menu-btn,
+body.theme-yellow .menu-btn,
+body.theme-green .menu-btn,
+body.theme-red .menu-btn,
+body.theme-purple .menu-btn,
+body.theme-blue .option,
+body.theme-yellow .option,
+body.theme-green .option,
+body.theme-red .option,
+body.theme-purple .option,
+body.theme-blue .settings-card,
+body.theme-yellow .settings-card,
+body.theme-green .settings-card,
+body.theme-red .settings-card,
+body.theme-purple .settings-card{
+  background:linear-gradient(180deg,var(--theme-card-b),var(--theme-card-a))!important;
+  border-color:var(--theme-border)!important;
+}
+
+/* Botones principales */
+body.theme-blue .primary-btn,
+body.theme-yellow .primary-btn,
+body.theme-green .primary-btn,
+body.theme-red .primary-btn,
+body.theme-purple .primary-btn,
+body.theme-blue .btn,
+body.theme-yellow .btn,
+body.theme-green .btn,
+body.theme-red .btn,
+body.theme-purple .btn,
+body.theme-blue .buscar,
+body.theme-yellow .buscar,
+body.theme-green .buscar,
+body.theme-red .buscar,
+body.theme-purple .buscar,
+body.theme-blue .secret-ok,
+body.theme-yellow .secret-ok,
+body.theme-green .secret-ok,
+body.theme-red .secret-ok,
+body.theme-purple .secret-ok{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent2))!important;
+}
+
+/* Botones de tema: ninguno queda marcado por defecto salvo el elegido */
+.theme-btn{
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  color:white!important;
+}
+
+.theme-btn.theme-active{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-accent2))!important;
+  color:white!important;
+  box-shadow:0 10px 25px color-mix(in srgb, var(--theme-accent) 32%, transparent)!important;
+}
+
+
+/* ===== AJUSTES FINAL: COLOR PRIVADO, CLARO/OSCURO, TAMAÑO ===== */
+body{
+  --app-bg1:#071529;
+  --app-bg2:#020713;
+  --app-bg3:#00040c;
+  --app-card1:rgba(9,22,43,.94);
+  --app-card2:rgba(13,32,60,.90);
+  --app-border:rgba(68,160,255,.22);
+  --app-text:#ffffff;
+  --app-muted:#b7c7df;
+  --app-accent:#2fc5ff;
+  --app-accent2:#2864ff;
+  --app-font-scale:1;
+  font-size:calc(16px * var(--app-font-scale))!important;
+}
+body.color-blue{--app-bg1:#071529;--app-bg2:#020713;--app-bg3:#00040c;--app-card1:rgba(9,22,43,.94);--app-card2:rgba(13,32,60,.90);--app-border:rgba(68,160,255,.22);--app-accent:#2fc5ff;--app-accent2:#2864ff;}
+body.color-yellow{--app-bg1:#2b2105;--app-bg2:#120c01;--app-bg3:#060400;--app-card1:rgba(52,38,7,.94);--app-card2:rgba(73,52,10,.90);--app-border:rgba(250,204,21,.27);--app-accent:#facc15;--app-accent2:#ff8a18;}
+body.color-green{--app-bg1:#062719;--app-bg2:#02110a;--app-bg3:#000604;--app-card1:rgba(6,43,29,.94);--app-card2:rgba(9,62,41,.90);--app-border:rgba(34,197,94,.26);--app-accent:#22c55e;--app-accent2:#14b8a6;}
+body.color-red{--app-bg1:#2b0708;--app-bg2:#120203;--app-bg3:#070001;--app-card1:rgba(55,11,12,.94);--app-card2:rgba(77,16,17,.90);--app-border:rgba(239,68,68,.28);--app-accent:#ef4444;--app-accent2:#fb6b2b;}
+body.color-purple{--app-bg1:#1c0735;--app-bg2:#090215;--app-bg3:#030007;--app-card1:rgba(34,12,64,.94);--app-card2:rgba(50,18,91,.90);--app-border:rgba(168,85,247,.30);--app-accent:#a855f7;--app-accent2:#4f46e5;}
+body.mode-light{
+  --app-bg1:color-mix(in srgb, var(--app-accent) 16%, #f4f9ff);
+  --app-bg2:#eaf2ff;
+  --app-bg3:#dbeafe;
+  --app-card1:rgba(255,255,255,.92);
+  --app-card2:rgba(255,255,255,.78);
+  --app-border:color-mix(in srgb, var(--app-accent) 30%, rgba(15,23,42,.16));
+  --app-text:#06111f;
+  --app-muted:#334155;
+}
+body.size-small{--app-font-scale:.88}
+body.size-normal{--app-font-scale:1}
+body.size-large{--app-font-scale:1.15}
+
+body,
+body .app,
+body .screen:not(#splash),
+body .menu-bg,
+body .wrap{
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--app-accent) 25%, transparent), transparent 31%),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--app-accent2) 20%, transparent), transparent 34%),
+    linear-gradient(180deg,var(--app-bg1),var(--app-bg2) 58%,var(--app-bg3))!important;
+  color:var(--app-text)!important;
+}
+body .card,
+body .result,
+body .panel,
+body .menu-btn,
+body .option,
+body .settings-card,
+body .update-card,
+body .normas-card,
+body .help-card,
+body .material-card{
+  background:linear-gradient(180deg,var(--app-card2),var(--app-card1))!important;
+  border-color:var(--app-border)!important;
+  color:var(--app-text)!important;
+}
+body small, body .muted, body .subtitle, body .by, body .label, body .section-title, body .row span{
+  color:var(--app-muted)!important;
+}
+body .primary-btn, body .btn, body .buscar, body .secret-ok, body .home-btn, body .back-home-btn{
+  background:linear-gradient(90deg,var(--app-accent),var(--app-accent2))!important;
+  color:white!important;
+}
+body input, body select{
+  color:var(--app-text)!important;
+  background:color-mix(in srgb, var(--app-bg2) 86%, #000 14%)!important;
+  border-color:var(--app-border)!important;
+}
+.secret-theme-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.secret-theme-btn,.secret-mode-btn,.secret-size-btn{
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:white;
+  border-radius:16px;
+  padding:13px 10px;
+  font-weight:1000;
+  cursor:pointer;
+}
+.secret-theme-btn.selected,.secret-mode-btn.selected,.secret-size-btn.selected{
+  background:linear-gradient(90deg,var(--app-accent),var(--app-accent2))!important;
+}
+.secret-admin-section{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);text-align:left}
+.secret-admin-section h4{margin:0 0 8px;letter-spacing:2px;color:#9fb3c8;font-size:13px}
+.secret-admin-actions{display:flex;gap:10px;margin-top:12px}
+.secret-admin-actions button{flex:1}
+.back-home-btn{width:100%;border:0;border-radius:18px;padding:15px;margin-top:12px;font-size:16px;font-weight:1000;letter-spacing:1px}
+.public-theme-block{display:none!important}
+
+
+/* ===== FIX FINAL DE BOTONES CRÍTICOS ===== */
+#secretModal{
+  position:fixed!important;
+  inset:0!important;
+  z-index:999999!important;
+}
+#secretModal.show{
+  display:flex!important;
+}
+.back-home-btn{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  border-radius:18px!important;
+  padding:16px!important;
+  margin:18px 0 8px!important;
+  font-size:16px!important;
+  font-weight:1000!important;
+  letter-spacing:1px!important;
+  cursor:pointer!important;
+}
+
+
+/* ===== FIX DEFINITIVO FUNCIONES AJUSTES ===== */
+body.size-small{--app-font-scale:.88}
+body.size-normal{--app-font-scale:1}
+body.size-big, body.size-large{--app-font-scale:1.15}
+
+.chip.active,
+[data-size-btn].active,
+.toggle.on{
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+  color:white!important;
+}
+
+.secret-admin-panel{
+  display:none;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.secret-admin-panel.show{display:block}
+.secret-admin-title{
+  color:#9fb3c8;
+  font-size:13px;
+  font-weight:1000;
+  letter-spacing:2px;
+  margin:0 0 10px;
+  text-transform:uppercase;
+}
+.secret-color-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.secret-color-btn{
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:white;
+  border-radius:16px;
+  padding:13px 10px;
+  font-weight:1000;
+}
+.secret-color-btn.selected{
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+}
+.secret-apply-row{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+.secret-apply-row button{flex:1}
+
+
+/* ===== FIX REAL FINAL: TAMAÑO / SONIDOS / PANEL SECRETO ===== */
+#secretColorPanel.secret-admin-panel{
+  display:none;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+#secretColorPanel.secret-admin-panel.show{
+  display:block!important;
+}
+.secret-color-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin-top:12px!important;
+}
+.secret-color-btn{
+  display:block!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  background:rgba(255,255,255,.08)!important;
+  color:white!important;
+  border-radius:16px!important;
+  padding:13px 10px!important;
+  font-weight:1000!important;
+}
+.secret-color-btn.selected{
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+}
+.secret-apply-row{
+  display:flex!important;
+  gap:10px!important;
+  margin-top:12px!important;
+}
+.secret-apply-row button{flex:1!important}
+.chips [data-size-btn="small"] ~ [data-size-btn="small"]{display:none!important}
+
+
+/* ===== FIX ABSOLUTO FINAL ===== */
+body.size-small{--app-font-scale:.88!important;font-size:14px!important}
+body.size-normal{--app-font-scale:1!important;font-size:16px!important}
+body.size-big{--app-font-scale:1.15!important;font-size:18px!important}
+
+[data-size-btn].active,
+.chip.active{
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+  color:#fff!important;
+}
+
+.back-home-btn{
+  display:block!important;
+  width:100%!important;
+  border:0!important;
+  border-radius:18px!important;
+  padding:16px!important;
+  margin:18px 0 8px!important;
+  font-size:16px!important;
+  font-weight:1000!important;
+  letter-spacing:1px!important;
+  cursor:pointer!important;
+  color:white!important;
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+}
+
+#soundToggle.on,
+#vibrationToggle.on,
+#animationsToggle.on,
+.toggle.on{
+  background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;
+}
+
+
+/* ===== FIX LIMPIO DEFINITIVO: TAMAÑO Y PANEL SECRETO ===== */
+#secretColorPanel.secret-admin-panel{display:none;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14)}
+#secretColorPanel.secret-admin-panel.show{display:block!important}
+.secret-color-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin-top:12px!important}
+.secret-color-btn{border:1px solid rgba(255,255,255,.16)!important;background:rgba(255,255,255,.08)!important;color:white!important;border-radius:16px!important;padding:13px 10px!important;font-weight:1000!important;cursor:pointer!important}
+.secret-color-btn.selected{background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important}
+.secret-apply-row{display:flex!important;gap:10px!important;margin-top:12px!important}
+.secret-apply-row button{flex:1!important}
+[data-size-btn].active,.chip.active{background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;color:white!important}
+
 </style>
 </head>
 <body>
@@ -305,6 +970,7 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
     </div>
     <div class="footer-note">PALETS PRO</div>
   </div>
+<button class="back-home-btn" type="button" onclick="volverPantallaCarga()">VOLVER A PANTALLA DE CARGA</button>
 </section>
 
 <section id="medidas" class="screen menu-bg">
@@ -379,16 +1045,17 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
       <div class="label">Apariencia</div>
       <div class="option-row"><div><span>Tema principal</span><small>Cambia el color de botones y detalles.</small></div></div>
       <div class="chips">
-        <button class="chip" data-theme-btn="blue" onclick="setTheme('blue')">Azul</button>
-        <button class="chip" data-theme-btn="yellow" onclick="setTheme('yellow')">Amarillo</button>
-        <button class="chip" data-theme-btn="green" onclick="setTheme('green')">Verde</button>
-        <button class="chip" data-theme-btn="red" onclick="setTheme('red')">Rojo</button>
-        <button class="chip" data-theme-btn="purple" onclick="setTheme('purple')">Morado</button>
+        <button class="chip" data-theme-btn="blue" onclick="setTheme('blue')" class="theme-btn" data-theme="blue" onclick="aplicarTemaGlobal(\'blue\')">Azul</button>
+        <button class="chip" data-theme-btn="yellow" onclick="setTheme('yellow')" class="theme-btn" data-theme="yellow" onclick="aplicarTemaGlobal(\'yellow\')">Amarillo</button>
+        <button class="chip" data-theme-btn="green" onclick="setTheme('green')" class="theme-btn" data-theme="green" onclick="aplicarTemaGlobal(\'green\')">Verde</button>
+        <button class="chip" data-theme-btn="red" onclick="setTheme('red')" class="theme-btn" data-theme="red" onclick="aplicarTemaGlobal(\'red\')">Rojo</button>
+        <button class="chip" data-theme-btn="purple" onclick="setTheme('purple')" class="theme-btn" data-theme="purple" onclick="aplicarTemaGlobal(\'purple\')">Morado</button>
       </div>
 
       <div class="settings-group">
         <div class="settings-title">Tamaño</div>
         <div class="chips">
+          <button class="chip" data-size-btn="small" onclick="setSize('small')">Pequeño</button>
           <button class="chip" data-size-btn="normal" onclick="setSize('normal')">Normal</button>
           <button class="chip" data-size-btn="big" onclick="setSize('big')">Grande</button>
         </div>
@@ -453,8 +1120,25 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   <div class="secret-card">
     <h3>Acceso desarrollador</h3>
     <p>Introduce el código privado.</p>
-    <input id="secretCodeInput" type="text" placeholder="Código" maxlength="10" autocomplete="off">
+    <input id="secretCodeInput" type="password" placeholder="Código" maxlength="10" autocomplete="off">
     <div id="secretMsg" class="preview" style="display:none"></div>
+    
+    
+    <div id="secretColorPanel" class="secret-admin-panel">
+      <div class="secret-admin-title">COLOR DE FONDO PRIVADO</div>
+      <div class="secret-color-grid">
+        <button type="button" class="secret-color-btn" data-secret-color="blue">Azul</button>
+        <button type="button" class="secret-color-btn" data-secret-color="yellow">Amarillo</button>
+        <button type="button" class="secret-color-btn" data-secret-color="green">Verde</button>
+        <button type="button" class="secret-color-btn" data-secret-color="red">Rojo</button>
+        <button type="button" class="secret-color-btn" data-secret-color="purple">Morado</button>
+      </div>
+      <div class="secret-apply-row">
+        <button type="button" class="btn btn-dark" onclick="aplicarColorPrivado()">Aplicar</button>
+        <button type="button" class="btn btn-blue" onclick="guardarColorPrivado()">Guardar</button>
+      </div>
+    </div>
+
     <div class="secret-actions">
       <button class="btn btn-dark" onclick="closeSecret()">Cancelar</button>
       <button class="btn btn-blue" onclick="checkSecretCode()">Entrar</button>
@@ -476,6 +1160,17 @@ const sounds = {
 Object.values(sounds).forEach(a=>{a.preload='auto'; a.volume=0.45;});
 function soundOn(){return localStorage.getItem('paletsSound')==='1';}
 function vibrateOn(){return localStorage.getItem('paletsVibration')!=='0';}
+function unlockAudio(){
+  try{
+    Object.values(sounds).forEach(a=>{
+      a.preload='auto';
+      a.volume=0.45;
+      const p=a.play();
+      if(p&&p.then){p.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});}
+      else {a.pause();a.currentTime=0;}
+    });
+  }catch(e){}
+}
 function playSound(name){
   if(!soundOn() || !sounds[name]) return;
   try{sounds[name].currentTime=0; sounds[name].play().catch(()=>{});}catch(e){}
@@ -483,18 +1178,29 @@ function playSound(name){
 function vib(ms=35){if(vibrateOn() && navigator.vibrate) navigator.vibrate(ms);}
 function setTheme(t){localStorage.setItem('paletsTheme',t);applySettings();playSound('click');}
 function setSize(s){localStorage.setItem('paletsSize',s);applySettings();playSound('click');}
-function toggleSound(){localStorage.setItem('paletsSound', soundOn()?'0':'1');applySettings(); if(soundOn()) playSound('click');}
+function toggleSound(){localStorage.setItem('paletsSound', soundOn()?'0':'1');applySettings(); if(soundOn()){unlockAudio();playSound('click');}}
 function toggleVibration(){localStorage.setItem('paletsVibration', vibrateOn()?'0':'1');applySettings();vib(45);}
 function animationsOn(){return localStorage.getItem('paletsAnimations')!=='0';}
 function toggleAnimations(){localStorage.setItem('paletsAnimations', animationsOn()?'0':'1');applySettings();playSound('click');}
 function applySettings(){
   const theme=localStorage.getItem('paletsTheme')||'blue';
   const size=localStorage.getItem('paletsSize')||'normal';
+
   document.body.setAttribute('data-theme',theme);
-  document.body.classList.toggle('size-big',size==='big');
+
+  document.body.classList.remove('size-small','size-normal','size-big','size-large');
+  if(size==='small') document.body.classList.add('size-small');
+  else if(size==='big' || size==='large') document.body.classList.add('size-big');
+  else document.body.classList.add('size-normal');
+
   document.body.classList.toggle('no-anim',!animationsOn());
+
   document.querySelectorAll('[data-theme-btn]').forEach(b=>b.classList.toggle('active',b.dataset.themeBtn===theme));
-  document.querySelectorAll('[data-size-btn]').forEach(b=>b.classList.toggle('active',b.dataset.sizeBtn===size));
+  document.querySelectorAll('[data-size-btn]').forEach(b=>{
+    const val=b.dataset.sizeBtn;
+    b.classList.toggle('active', val===size || (size==='big'&&val==='big') || (size==='large'&&val==='big'));
+  });
+
   const st=document.getElementById('soundToggle'); if(st) st.classList.toggle('on',soundOn());
   const vt=document.getElementById('vibrationToggle'); if(vt) vt.classList.toggle('on',vibrateOn());
   const at=document.getElementById('animationsToggle'); if(at) at.classList.toggle('on',animationsOn());
@@ -532,20 +1238,35 @@ function watermarkTap(){
 function openSecret(){
   const m=document.getElementById('secretModal');
   m.classList.add('show');
-  document.getElementById('secretCodeInput').value='';
+  const input=document.getElementById('secretCodeInput');
+  input.type='password';
+  input.value='';
   document.getElementById('secretMsg').style.display='none';
-  setTimeout(()=>document.getElementById('secretCodeInput').focus(),150);
+  const panel=document.getElementById('secretColorPanel'); if(panel) panel.classList.remove('show');
+  setTimeout(()=>input.focus(),150);
 }
 function closeSecret(){document.getElementById('secretModal').classList.remove('show');}
 function checkSecretCode(){
   const now=Date.now();
   const msg=document.getElementById('secretMsg');
+  const panel=document.getElementById('secretColorPanel');
   if(now<secretLockUntil){msg.style.display='block';msg.innerHTML='⏳ Bloqueado unos minutos.';playSound('error');return;}
   const code=(document.getElementById('secretCodeInput').value||'').trim().toUpperCase();
   if(code==='RD268'){
-    secretFail=0;msg.style.display='block';msg.innerHTML='✅ Acceso correcto. Panel secreto en standby.';playSound('success');vib(60);
+    secretFail=0;
+    msg.style.display='block';
+    msg.innerHTML='✅ Código correcto. Opciones privadas desbloqueadas.';
+    if(panel) panel.classList.add('show');
+    prepararColorPrivado();
+    playSound('success');
+    vib(60);
   }else{
-    secretFail++;msg.style.display='block';msg.innerHTML='❌ Código incorrecto';playSound('error');vib(90);
+    secretFail++;
+    msg.style.display='block';
+    msg.innerHTML='❌ Código incorrecto';
+    if(panel) panel.classList.remove('show');
+    playSound('error');
+    vib(90);
     if(secretFail>=2){secretLockUntil=Date.now()+10*60*1000;msg.innerHTML='⛔ 2 intentos fallidos. Bloqueado 10 minutos.';}
   }
 }
@@ -5183,6 +5904,379 @@ document.addEventListener("keydown", function(e){
     validarCodigoSecreto();
   }
 });
+</script>
+
+
+
+
+
+<script>
+/* ===== FIX FINAL ERROR SONIDO DOULITE MATERIAL ===== */
+function rdPlayError(){
+  try{
+    if(typeof sounds !== "undefined" && sounds.error){
+      sounds.error.currentTime = 0;
+      sounds.error.play();
+      return;
+    }
+    if(typeof playSound === "function"){
+      playSound("error");
+      return;
+    }
+  }catch(e){}
+}
+
+function rdMaterialVacio(){
+  const p1 = document.getElementById("p1") || document.getElementById("matP1");
+  const p2 = document.getElementById("p2") || document.getElementById("matP2");
+  const v1 = (p1?.value || "").trim();
+  const v2 = (p2?.value || "").trim();
+  return v1.length < 2 || v2.length < 3;
+}
+
+function rdMostrarErrorMaterial(){
+  const res = document.getElementById("res") || document.getElementById("matRes");
+  if(res){
+    res.innerHTML = `
+      <div class="error material-error">
+        Introduce el material completo ❌<br>
+        <small>Faltan dígitos para buscar</small>
+      </div>
+    `;
+  }
+}
+
+document.addEventListener("click", function(e){
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  const txt = (btn.textContent || "").trim().toUpperCase();
+  const materialScreen = document.getElementById("material") || document.getElementById("screenDouliteMaterial");
+  const materialVisible = materialScreen && materialScreen.classList.contains("active");
+  if(materialVisible && txt === "BUSCAR" && rdMaterialVacio()){
+    e.preventDefault();
+    e.stopPropagation();
+    rdPlayError();
+    rdMostrarErrorMaterial();
+  }
+}, true);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* ===== AJUSTES FUNCIONALES FINALES ===== */
+(function(){
+  let colorTemporal = localStorage.getItem("paletsPrivateColor") || "blue";
+
+  function clearColorClasses(){
+    document.body.classList.remove("color-blue","color-yellow","color-green","color-red","color-purple");
+    document.body.classList.remove("theme-blue","theme-yellow","theme-green","theme-red","theme-purple");
+  }
+
+  window.aplicarColorBase = function(color){
+    const valid = ["blue","yellow","green","red","purple"];
+    if(!valid.includes(color)) color = "blue";
+    clearColorClasses();
+    document.body.classList.add("color-" + color);
+    colorTemporal = color;
+    pintarBotonesColorPrivado(color);
+  };
+
+  window.aplicarColorPrivado = function(){ aplicarColorBase(colorTemporal); };
+
+  window.guardarColorPrivado = function(){
+    aplicarColorBase(colorTemporal);
+    localStorage.setItem("paletsPrivateColor", colorTemporal);
+    const msg = document.getElementById("secretMsg");
+    if(msg) msg.textContent = "Color guardado.";
+  };
+
+  function pintarBotonesColorPrivado(color){
+    document.querySelectorAll("[data-private-color]").forEach(btn=>{
+      btn.classList.toggle("selected", btn.dataset.privateColor === color);
+    });
+  }
+
+  window.setModoVisual = function(mode){
+    document.body.classList.remove("mode-dark","mode-light");
+    const finalMode = mode === "light" ? "light" : "dark";
+    document.body.classList.add(finalMode === "light" ? "mode-light" : "mode-dark");
+    localStorage.setItem("paletsModoVisual", finalMode);
+    document.querySelectorAll("[data-mode]").forEach(btn=>btn.classList.toggle("selected", btn.dataset.mode === finalMode));
+  };
+
+  window.setTamanoApp = function(size){
+    const valid = ["small","normal","large"];
+    if(!valid.includes(size)) size = "normal";
+    document.body.classList.remove("size-small","size-normal","size-large");
+    document.body.classList.add("size-" + size);
+    localStorage.setItem("paletsTamano", size);
+    document.querySelectorAll("[data-size]").forEach(btn=>btn.classList.toggle("selected", btn.dataset.size === size));
+  };
+
+  function prepararAjustesVisibles(){
+    /* ocultar bloque público de color */
+    document.querySelectorAll("button").forEach(btn=>{
+      const t=(btn.textContent||"").trim().toLowerCase();
+      if(["azul","amarillo","verde","rojo","morado"].includes(t) && !btn.closest("#secretAdminPanel")){
+        const parent = btn.parentElement;
+        if(parent) parent.classList.add("public-theme-block");
+      }
+    });
+
+    const ajustes = document.getElementById("ajustes") || document.querySelector("#settings");
+    const card = ajustes ? (ajustes.querySelector(".card") || ajustes.querySelector(".panel") || ajustes.querySelector(".settings-card")) : null;
+
+    if(card && !document.getElementById("modoVisualBlock")){
+      const div=document.createElement("div");
+      div.id="modoVisualBlock";
+      div.innerHTML=`
+        <div class="section-title" style="margin-top:22px;">ESTILO</div>
+        <div style="display:flex;gap:10px;margin:12px 0 18px;">
+          <button class="secret-mode-btn" type="button" data-mode="dark" onclick="setModoVisual('dark')">Oscuro</button>
+          <button class="secret-mode-btn" type="button" data-mode="light" onclick="setModoVisual('light')">Claro</button>
+        </div>`;
+      card.appendChild(div);
+    }
+
+    document.querySelectorAll("button").forEach(btn=>{
+      const t=(btn.textContent||"").trim().toLowerCase();
+      if(t==="normal"){btn.dataset.size="normal";btn.onclick=()=>setTamanoApp("normal");}
+      if(t==="grande"){btn.dataset.size="large";btn.onclick=()=>setTamanoApp("large");}
+    });
+
+    const normalBtn=[...document.querySelectorAll("button")].find(b=>(b.textContent||"").trim().toLowerCase()==="normal");
+    if(normalBtn && !document.querySelector('[data-size="small"]')){
+      const small=document.createElement("button");
+      small.textContent="Pequeño";
+      small.className=normalBtn.className || "secret-size-btn";
+      small.dataset.size="small";
+      small.onclick=()=>setTamanoApp("small");
+      normalBtn.parentElement.insertBefore(small, normalBtn);
+    }
+  }
+
+  function prepararPanelSecreto(){
+    document.querySelectorAll("[data-private-color]").forEach(btn=>{
+      btn.onclick=function(){
+        colorTemporal=btn.dataset.privateColor;
+        pintarBotonesColorPrivado(colorTemporal);
+      };
+    });
+  }
+
+  const oldValidar = window.validarCodigoSecreto;
+  window.validarCodigoSecreto = function(){
+    const input=document.getElementById("secretCodeInput");
+    const msg=document.getElementById("secretMsg");
+    const panel=document.getElementById("secretAdminPanel");
+    const code=(input?.value||"").trim().toUpperCase();
+
+    if(code==="RD268"){
+      if(msg) msg.textContent="Código correcto. Opciones privadas desbloqueadas.";
+      if(panel) panel.style.display="block";
+      prepararPanelSecreto();
+      pintarBotonesColorPrivado(colorTemporal);
+      return;
+    }
+    if(oldValidar) return oldValidar();
+    if(msg) msg.textContent="Código incorrecto.";
+  };
+
+  function initFinal(){
+    aplicarColorBase(localStorage.getItem("paletsPrivateColor") || "blue");
+    setModoVisual(localStorage.getItem("paletsModoVisual") || "dark");
+    setTamanoApp(localStorage.getItem("paletsTamano") || "normal");
+    prepararAjustesVisibles();
+    prepararPanelSecreto();
+  }
+
+  document.addEventListener("DOMContentLoaded", initFinal);
+  window.addEventListener("load", initFinal);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* ===== FIX LIMPIO DEFINITIVO FUNCIONES ===== */
+(function(){
+  // --- Tamaño ---
+  window.setSize = function(s){
+    if(!["small","normal","big"].includes(s)) s = "normal";
+    localStorage.setItem("paletsSize", s);
+    document.body.classList.remove("size-small","size-normal","size-big","size-large");
+    document.body.classList.add(s === "small" ? "size-small" : s === "big" ? "size-big" : "size-normal");
+    document.querySelectorAll("[data-size-btn]").forEach(b=>{
+      b.classList.toggle("active", b.dataset.sizeBtn === s);
+    });
+    try{ playSound("click"); }catch(e){}
+  };
+
+  // --- Sonidos ---
+  window.soundOn = function(){
+    return localStorage.getItem("paletsSound") === "1";
+  };
+
+  window.playSound = function(name){
+    try{
+      if(!soundOn()) return;
+      if(typeof sounds === "undefined" || !sounds[name]) return;
+      sounds[name].currentTime = 0;
+      sounds[name].play().catch(()=>{});
+    }catch(e){}
+  };
+
+  window.unlockAudio = function(){
+    try{
+      if(typeof sounds === "undefined") return;
+      Object.values(sounds).forEach(a=>{
+        a.preload = "auto";
+        a.volume = 0.45;
+        const p = a.play();
+        if(p && p.then) p.then(()=>{a.pause();a.currentTime=0;}).catch(()=>{});
+      });
+    }catch(e){}
+  };
+
+  window.toggleSound = function(){
+    const nuevo = soundOn() ? "0" : "1";
+    localStorage.setItem("paletsSound", nuevo);
+    const st = document.getElementById("soundToggle");
+    if(st) st.classList.toggle("on", nuevo === "1");
+    if(nuevo === "1"){
+      unlockAudio();
+      setTimeout(()=>playSound("click"),120);
+    }
+  };
+
+  // --- Código secreto / color fondo privado ---
+  let colorTemp = localStorage.getItem("paletsPrivateColor") || "blue";
+
+  function marcarColorPrivado(){
+    document.querySelectorAll("[data-secret-color]").forEach(btn=>{
+      btn.classList.toggle("selected", btn.dataset.secretColor === colorTemp);
+      btn.onclick = function(){
+        colorTemp = btn.dataset.secretColor;
+        marcarColorPrivado();
+      };
+    });
+  }
+
+  window.aplicarColorPrivado = function(){
+    document.body.classList.remove("color-blue","color-yellow","color-green","color-red","color-purple");
+    document.body.classList.add("color-" + colorTemp);
+    marcarColorPrivado();
+    try{ playSound("click"); }catch(e){}
+  };
+
+  window.guardarColorPrivado = function(){
+    aplicarColorPrivado();
+    localStorage.setItem("paletsPrivateColor", colorTemp);
+    const msg = document.getElementById("secretMsg");
+    if(msg){
+      msg.style.display = "block";
+      msg.innerHTML = "✅ Color guardado.";
+    }
+    try{ playSound("success"); }catch(e){}
+  };
+
+  window.checkSecretCode = function(){
+    const code = (document.getElementById("secretCodeInput")?.value || "").trim().toUpperCase();
+    const msg = document.getElementById("secretMsg");
+    const panel = document.getElementById("secretColorPanel");
+    if(code === "RD268"){
+      if(msg){
+        msg.style.display = "block";
+        msg.innerHTML = "✅ Código correcto. Opciones privadas desbloqueadas.";
+      }
+      if(panel) panel.classList.add("show");
+      marcarColorPrivado();
+      try{ playSound("success"); }catch(e){}
+    }else{
+      if(msg){
+        msg.style.display = "block";
+        msg.innerHTML = "❌ Código incorrecto";
+      }
+      if(panel) panel.classList.remove("show");
+      try{ playSound("error"); }catch(e){}
+    }
+  };
+
+  window.openSecret = function(){
+    const modal = document.getElementById("secretModal");
+    const input = document.getElementById("secretCodeInput");
+    const msg = document.getElementById("secretMsg");
+    const panel = document.getElementById("secretColorPanel");
+    if(modal) modal.classList.add("show");
+    if(input){ input.type = "password"; input.value = ""; setTimeout(()=>input.focus(),150); }
+    if(msg) msg.style.display = "none";
+    if(panel) panel.classList.remove("show");
+  };
+
+  window.closeSecret = function(){
+    document.getElementById("secretModal")?.classList.remove("show");
+  };
+
+  window.volverPantallaCarga = function(){
+    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+    const splash = document.getElementById("splash");
+    if(splash) splash.classList.add("active");
+    window.scrollTo(0,0);
+  };
+
+  function init(){
+    // Quitar cualquier duplicado real de pequeño
+    const sizeContainer = [...document.querySelectorAll(".settings-title")]
+      .find(x => (x.textContent||"").trim().toLowerCase() === "tamaño")
+      ?.parentElement?.querySelector(".chips");
+
+    if(sizeContainer){
+      sizeContainer.innerHTML = `
+          <button class="chip" data-size-btn="small" onclick="setSize('small')">Pequeño</button>
+          <button class="chip" data-size-btn="normal" onclick="setSize('normal')">Normal</button>
+          <button class="chip" data-size-btn="big" onclick="setSize('big')">Grande</button>
+      `;
+    }
+
+    const savedSize = localStorage.getItem("paletsSize") || "normal";
+    setSize(savedSize);
+
+    const st = document.getElementById("soundToggle");
+    if(st){
+      st.onclick = toggleSound;
+      st.classList.toggle("on", soundOn());
+    }
+
+    document.querySelectorAll(".back-home-btn").forEach(b=>b.onclick = volverPantallaCarga);
+
+    colorTemp = localStorage.getItem("paletsPrivateColor") || "blue";
+    aplicarColorPrivado();
+    marcarColorPrivado();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  window.addEventListener("load", init);
+})();
 </script>
 
 </body>
