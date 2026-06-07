@@ -983,6 +983,90 @@ body.size-big{--app-font-scale:1.15!important;font-size:18px!important}
   letter-spacing:5px!important;
 }
 
+
+/* ===== FIX MODO CLARO LEGIBLE + LOGO SPLASH MÁS ARRIBA ===== */
+
+/* Logo SOLO en pantalla de carga más arriba */
+#splash .sonoco-brand{
+  margin-top:-210px!important;
+  margin-bottom:4px!important;
+  transform:translateY(-95px)!important;
+}
+
+#splash .sonoco-brand img{
+  width:265px!important;
+  max-width:74vw!important;
+}
+
+/* Modo claro menos blanco, más legible */
+body.mode-light,
+body.mode-light .screen:not(#splash),
+body.mode-light .menu-bg,
+body.mode-light .wrap,
+body.mode-light .app{
+  background:
+    radial-gradient(circle at 18% 0%, rgba(47,197,255,.18), transparent 32%),
+    radial-gradient(circle at 100% 0%, rgba(40,100,255,.14), transparent 34%),
+    linear-gradient(180deg,#d5e6f4,#bfd1e5 58%,#aebfd4)!important;
+  color:#07111f!important;
+}
+
+body.mode-light .card,
+body.mode-light .result,
+body.mode-light .panel,
+body.mode-light .menu-btn,
+body.mode-light .option,
+body.mode-light .settings-card,
+body.mode-light .update-card,
+body.mode-light .normas-card,
+body.mode-light .help-card,
+body.mode-light .material-card{
+  background:rgba(245,249,255,.86)!important;
+  border-color:rgba(34,168,255,.35)!important;
+  color:#07111f!important;
+  box-shadow:0 18px 45px rgba(15,35,65,.20)!important;
+}
+
+/* Textos en claro más oscuros para que se lean */
+body.mode-light h1,
+body.mode-light h2,
+body.mode-light h3,
+body.mode-light .title,
+body.mode-light .settings-title,
+body.mode-light .menu-btn strong,
+body.mode-light .option-title,
+body.mode-light .status-text{
+  color:#07111f!important;
+}
+
+body.mode-light .subtitle,
+body.mode-light .label,
+body.mode-light .section-title,
+body.mode-light small,
+body.mode-light .muted,
+body.mode-light .by,
+body.mode-light .preview,
+body.mode-light .settings-group p{
+  color:rgba(20,35,55,.78)!important;
+}
+
+/* Inputs claros pero no lavados */
+body.mode-light input,
+body.mode-light select{
+  background:rgba(230,238,248,.92)!important;
+  color:#07111f!important;
+  border-color:rgba(47,197,255,.45)!important;
+}
+
+/* ASTURIAS visible en modo claro */
+body.mode-light .sonoco-brand .asturias{
+  color:#ffffff!important;
+  text-shadow:
+    0 0 7px rgba(255,255,255,.95),
+    0 0 18px rgba(0,65,130,.55),
+    0 3px 8px rgba(0,0,0,.35)!important;
+}
+
 </style>
 </head>
 <body>
