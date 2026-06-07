@@ -205,11 +205,11 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   user-select:none;
 }
 .sonoco-brand img{
-  width:86px;
-  max-width:32vw;
+  width:130px;
+  max-width:42vw;
   height:auto;
   object-fit:contain;
-  filter:drop-shadow(0 8px 18px rgba(0,0,0,.38));
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.45));
 }
 .sonoco-brand .asturias{
   font-size:13px;
@@ -242,6 +242,30 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
 .secret-ok{background:linear-gradient(90deg,#20c5ff,#2864ff)}
 .secret-cancel{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.14)!important}
 .secret-msg{margin-top:14px;min-height:22px;color:#38bdf8;font-size:14px;font-weight:900}
+
+
+/* ===== FIX DEFINITIVO LOGO / CUADRO AZUL ===== */
+.mark,
+.mark span,
+.menu-logo,
+.menu-logo .mark,
+.splash-icon,
+.app-icon,
+.logo-square,
+.logo-mark,
+.fake-logo,
+.icon-mark{
+  display:none!important;
+}
+
+.sonoco-brand{
+  margin-bottom:22px!important;
+}
+
+.sonoco-brand img{
+  width:130px!important;
+  max-width:42vw!important;
+}
 
 </style>
 </head>
@@ -5091,5 +5115,72 @@ pintarHistorial();
   setTimeout(quitarCargaInicial,2500);
 })();
 </script>
+
+<script>
+/* ===== ACCESO OCULTO STANDBY REAL ===== */
+let rdSecretTaps = 0;
+let rdSecretTimer = null;
+
+function logoSecretTap(){
+  rdSecretTaps++;
+  clearTimeout(rdSecretTimer);
+
+  if(rdSecretTaps >= 5){
+    rdSecretTaps = 0;
+    abrirSecretModal();
+    return;
+  }
+
+  rdSecretTimer = setTimeout(function(){
+    rdSecretTaps = 0;
+  }, 1500);
+}
+
+function abrirSecretModal(){
+  const modal = document.getElementById("secretModal");
+  const input = document.getElementById("secretCodeInput");
+  const msg = document.getElementById("secretMsg");
+
+  if(msg) msg.textContent = "";
+  if(input){
+    input.value = "";
+    setTimeout(function(){ input.focus(); }, 150);
+  }
+  if(modal) modal.classList.add("show");
+}
+
+function cerrarSecretModal(){
+  const modal = document.getElementById("secretModal");
+  if(modal) modal.classList.remove("show");
+}
+
+function validarCodigoSecreto(){
+  const input = document.getElementById("secretCodeInput");
+  const msg = document.getElementById("secretMsg");
+  const code = (input && input.value ? input.value : "").trim().toUpperCase();
+
+  if(code === "RD268"){
+    if(msg) msg.textContent = "Código correcto. Funciones privadas en standby.";
+    return;
+  }
+
+  if(msg) msg.textContent = "Código incorrecto.";
+}
+
+document.addEventListener("click", function(e){
+  const brand = e.target.closest(".sonoco-brand");
+  if(brand){
+    logoSecretTap();
+  }
+});
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape") cerrarSecretModal();
+  if(e.key === "Enter" && document.activeElement && document.activeElement.id === "secretCodeInput"){
+    validarCodigoSecreto();
+  }
+});
+</script>
+
 </body>
 </html>
