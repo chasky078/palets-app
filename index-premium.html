@@ -1067,13 +1067,70 @@ body.mode-light .sonoco-brand .asturias{
     0 3px 8px rgba(0,0,0,.35)!important;
 }
 
+
+/* ===== TOQUE FINAL SPLASH: LOGO ARRIBA + CONTORNO + SONOCO ASTURIAS ===== */
+
+#splash .sonoco-brand{
+  margin-top:-245px!important;
+  margin-bottom:4px!important;
+  transform:translateY(-120px)!important;
+}
+
+#splash .sonoco-brand img{
+  width:285px!important;
+  max-width:78vw!important;
+  height:auto!important;
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.98))
+    drop-shadow(0 0 12px rgba(255,255,255,.62))
+    drop-shadow(0 0 30px rgba(0,0,0,.62))
+    drop-shadow(0 12px 28px rgba(0,0,0,.50))!important;
+}
+
+#splash .sonoco-flag{
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  width:max-content;
+  margin:12px auto 0 auto;
+  padding:8px 18px;
+  background:#0057b8;
+  border:2px solid rgba(255,255,255,.22);
+  border-radius:14px;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.38),
+    0 0 18px rgba(0,87,184,.48);
+  backdrop-filter:blur(10px);
+}
+
+#splash .sonoco-flag span{
+  color:#ffd83d!important;
+  font-weight:1000!important;
+  letter-spacing:4px!important;
+  font-size:13px!important;
+  line-height:1.05;
+  text-shadow:
+    0 0 8px rgba(255,216,61,.55),
+    0 2px 5px rgba(0,0,0,.35)!important;
+}
+
+.screen:not(#splash) .sonoco-flag{
+  display:none!important;
+}
+
 </style>
 </head>
 <body>
 
 <section id="splash" class="screen active">
   <div class="splash-content">
-    <div class="sonoco-brand" onclick="logoSecretTap()"><img src="logo-s.png" alt="SONOCO"><div class="asturias">ASTURIAS</div></div>
+    <div class="sonoco-brand" onclick="logoSecretTap()"><img src="logo-s.png" alt="SONOCO">
+      <div class="sonoco-flag">
+        <span>SONOCO</span>
+        <span>ASTURIAS</span>
+      </div><div class="asturias">ASTURIAS</div></div>
     <h1 class="title">PALETS</h1>
     <div class="under"></div>
     <p class="subtitle">Sistema inteligente<br>de búsqueda</p>
