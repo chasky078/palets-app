@@ -212,14 +212,10 @@ body.no-anim *,body.no-anim *::before,body.no-anim *::after{animation:none!impor
   filter:drop-shadow(0 10px 22px rgba(0,0,0,.45));
 }
 .sonoco-brand .asturias{
-    font-size:18px;
-    font-weight:1000;
-    letter-spacing:8px;
-    color:#ffffff;
-    text-shadow:
-        0 0 8px rgba(255,255,255,.95),
-        0 0 18px rgba(255,255,255,.55);
-}
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:rgba(255,255,255,.82);
 }
 .menu-brand{margin-top:6px;margin-bottom:28px}
 .screen-top-brand{margin-top:4px;margin-bottom:14px}
@@ -370,9 +366,9 @@ h1,h2,h3{
 }
 
 .sonoco-brand{
-  margin-top:-75px!important;
+  margin-top:-34px!important;
   margin-bottom:30px!important;
-  transform:translateY(-25px);
+  transform:translateY(-10px);
 }
 
 .sonoco-brand img{
@@ -938,6 +934,54 @@ body.size-big{--app-font-scale:1.15!important;font-size:18px!important}
 .secret-apply-row{display:flex!important;gap:10px!important;margin-top:12px!important}
 .secret-apply-row button{flex:1!important}
 [data-size-btn].active,.chip.active{background:linear-gradient(90deg,var(--app-accent,#2fc5ff),var(--app-accent2,#2864ff))!important;color:white!important}
+
+
+/* ===== FIX FINAL POSICIÓN LOGOS ===== */
+
+/* Pantalla de carga: logo más alto y protagonista */
+#splash .sonoco-brand{
+  margin-top:-145px!important;
+  margin-bottom:8px!important;
+  transform:translateY(-55px)!important;
+}
+
+#splash .sonoco-brand img{
+  width:240px!important;
+  max-width:72vw!important;
+}
+
+/* Menú y pantallas internas: logo más pequeño para que no tape contenido */
+#menu .sonoco-brand,
+.screen:not(#splash) .sonoco-brand{
+  margin-top:8px!important;
+  margin-bottom:18px!important;
+  transform:none!important;
+}
+
+#menu .sonoco-brand img,
+.screen:not(#splash) .sonoco-brand img{
+  width:115px!important;
+  max-width:34vw!important;
+}
+
+/* ASTURIAS más visible sin crecer demasiado */
+.sonoco-brand .asturias{
+  font-size:18px!important;
+  font-weight:1000!important;
+  letter-spacing:8px!important;
+  color:#ffffff!important;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.95),
+    0 0 18px rgba(255,255,255,.55),
+    0 3px 8px rgba(0,0,0,.55)!important;
+}
+
+/* En menú un poco más pequeño */
+#menu .sonoco-brand .asturias,
+.screen:not(#splash) .sonoco-brand .asturias{
+  font-size:14px!important;
+  letter-spacing:5px!important;
+}
 
 </style>
 </head>
