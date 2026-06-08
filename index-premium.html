@@ -1179,6 +1179,76 @@ body.mode-light .sonoco-brand .asturias{
   max-width:34vw!important;
 }
 
+
+/* ===== AJUSTE FINAL DEFINITIVO SPLASH SONOCO ===== */
+#splash .sonoco-brand{
+  margin-top:-180px!important;
+  margin-bottom:4px!important;
+  transform:translateY(-58px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+}
+
+#splash .sonoco-brand img{
+  width:270px!important;
+  max-width:76vw!important;
+  height:auto!important;
+  margin-bottom:2px!important;
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.98))
+    drop-shadow(0 0 12px rgba(255,255,255,.62))
+    drop-shadow(0 0 30px rgba(0,0,0,.62))
+    drop-shadow(0 12px 28px rgba(0,0,0,.50))!important;
+}
+
+#splash .sonoco-text{
+  position:relative!important;
+  margin-top:-38px!important;
+  margin-bottom:12px!important;
+  text-align:center!important;
+  font-size:19px!important;
+  font-weight:1000!important;
+  letter-spacing:7px!important;
+  color:#ffffff!important;
+  z-index:20!important;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.95),
+    0 0 24px rgba(255,255,255,.65),
+    0 4px 12px rgba(0,0,0,.65)!important;
+}
+
+#splash .asturias-box{
+  display:inline-block!important;
+  padding:7px 22px!important;
+  border-radius:14px!important;
+  background:#0057b8!important;
+  color:#ffd83d!important;
+  font-size:15px!important;
+  font-weight:1000!important;
+  letter-spacing:5px!important;
+  margin:0 auto 8px auto!important;
+  box-shadow:
+    0 0 20px rgba(0,87,184,.45),
+    0 4px 12px rgba(0,0,0,.35)!important;
+  border:2px solid rgba(255,255,255,.20)!important;
+}
+
+.screen:not(#splash) .sonoco-text,
+.screen:not(#splash) .asturias-box{
+  display:none!important;
+}
+
+.screen:not(#splash) .sonoco-brand{
+  margin-top:8px!important;
+  margin-bottom:18px!important;
+  transform:none!important;
+}
+.screen:not(#splash) .sonoco-brand img{
+  width:115px!important;
+  max-width:34vw!important;
+}
+
 </style>
 </head>
 <body>
@@ -1186,7 +1256,7 @@ body.mode-light .sonoco-brand .asturias{
 <section id="splash" class="screen active">
   <div class="splash-content">
     <div class="sonoco-brand" onclick="logoSecretTap()"><img src="logo-s.png" alt="SONOCO"></div>
-    
+
     <div class="sonoco-text">SONOCO</div>
     <div class="asturias-box">ASTURIAS</div>
 <h1 class="title">PALETS</h1>
